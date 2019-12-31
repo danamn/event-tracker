@@ -1,0 +1,16 @@
+<h2>
+  Your Calendars
+</h2>
+
+<div>
+  <p>Pick a calendar:</p>
+  <ul class="calendars">
+    <a
+      class="calendar"
+      *ngFor="let calendar of calendars"
+      routerLink="/calendar/{{ calendar.id }}"
+    >
+      <span>{{ calendar.name }}</span>
+    </a>
+  </ul>
+</div>

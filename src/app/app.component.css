@@ -1,0 +1,17 @@
+nav {
+  background-color: black;
+}
+
+.nav-item {
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-item:hover {
+  color: yellow;
+}
+
+.nav-item.active {
+  color: rgb(127, 185, 127);
+}

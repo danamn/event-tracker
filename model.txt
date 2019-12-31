@@ -1,0 +1,37 @@
+{calendars: [
+	{
+	calendarId: String,
+	calendarName: String,
+	eventModel: {
+		fields: [
+			{
+			name: String,
+			type: String(oneOf: date|time|inputField|textField|dropdown|eventType),
+			categories: String[](optional)
+			}		
+		]
+	},
+	eventTypeModel: {
+		fields: [
+			{
+			name: String,
+			type: String(oneOf: date|time|inputField|textField|dropdown),
+			categories: String[](optional)
+			}		
+		]
+	},
+	events: [
+		{
+		id: String,
+		typeId: String (eventTypes[type].id)
+		...eventFields 
+		}
+	],
+	eventTypes: [
+		{
+		id: String,
+		...eventTypeFields
+		}
+	]}
+	}
+]}

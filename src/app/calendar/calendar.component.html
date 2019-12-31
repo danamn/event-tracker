@@ -1,0 +1,10 @@
+<h3>{{ calendar.name }}</h3>
+
+<div class="events">
+  Events
+  <ul>
+    <li *ngFor="let event of events">
+      {{ event.date }}
+    </li>
+  </ul>
+</div>
