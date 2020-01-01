@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+
 import { CALENDARS } from "./mock-calendars";
 
 @Component({
@@ -10,6 +11,5 @@ export class CalendarsComponent implements OnInit {
   constructor() {}
 
   calendars = CALENDARS;
-
   ngOnInit() {}
 }

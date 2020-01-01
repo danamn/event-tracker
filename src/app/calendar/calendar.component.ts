@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { Observable } from "rxjs";
 
 import { Calendar } from "./calendar";
+import { TrEvent } from "../model/tr-event";
 import { CALENDARS } from "../calendars/mock-calendars";
 
 @Component({
@@ -14,6 +15,7 @@ import { CALENDARS } from "../calendars/mock-calendars";
 export class CalendarComponent implements OnInit {
   // calendar$: Observable<Calendar>;
   calendar: Calendar;
+  events: TrEvent[];
   constructor(private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
@@ -21,9 +23,23 @@ export class CalendarComponent implements OnInit {
   }
 
   getCalendar(): void {
-    const id = this.route.snapshot.paramMap.get("id");
-    const calendar: Calendar = CALENDARS.find((cal: Calendar) => cal.id === id);
+    const name = this.route.snapshot.paramMap.get("name");
+
+    const calendar: Calendar = CALENDARS.find(
+      (cal: Calendar) => cal.name === name
+    );
+
     this.calendar = calendar;
+    this.events = calendar.events;
+  }
+
+  addEvent() {
+    const newEvent: TrEvent = new TrEvent({
+      name: "test",
+      id: "123",
+      date: new Date()
+    });
+    this.calendar.addEvent(newEvent);
   }
 
   goBack(): void {

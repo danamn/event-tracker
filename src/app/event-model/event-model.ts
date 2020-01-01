@@ -1,7 +1,14 @@
-import { EventType } from "./type";
+import { EventType } from "../model/type";
 
 export class EventModel {
   fields: Field[];
+  constructor() {
+    this.fields = [];
+  }
+
+  addField(field: Field) {
+    this.fields.push(field);
+  }
 }
 
 interface Field {

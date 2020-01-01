@@ -13,6 +13,13 @@
     >Calendars</a
   >
 </nav>
+<!-- <nav *ngIf="currentCalendar">
+  <a routerLink="/calendars/{{ currentCalendar.name }}">{{ calendar.name }}</a>
+  <a routerLink="/calendars/{{ currentCalendar.name }}/events-model">
+    >Events Model
+  </a>
+</nav> -->
+
 <div>
   <router-outlet></router-outlet>
 </div>

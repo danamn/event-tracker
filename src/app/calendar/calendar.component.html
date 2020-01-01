@@ -1,10 +1,19 @@
-<h3>{{ calendar.name }}</h3>
-
 <div class="events">
+  <a
+    class="nav-item"
+    routerLink="/calendars/{{ calendar.name }}/event-model"
+    routerLinkActive="active"
+    >Event Model</a
+  >
   Events
   <ul>
     <li *ngFor="let event of events">
       {{ event.date }}
     </li>
   </ul>
+
+  <div class="buttons">
+    <button (click)="addEvent()">Add Event</button>
+    <button (click)="goBack()">Back</button>
+  </div>
 </div>

@@ -1,0 +1,19 @@
+.buttons {
+  display: flex;
+}
+
+.buttons button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid darkblue;
+  border-radius: 5px;
+}
+
+nav {
+  display: flex;
+}
+
+nav a {
+  margin-left: 10px;
+  text-decoration: none;
+}

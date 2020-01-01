@@ -8,7 +8,7 @@
     <a
       class="calendar"
       *ngFor="let calendar of calendars"
-      routerLink="/calendar/{{ calendar.id }}"
+      routerLink="/calendars/{{ calendar.name }}"
     >
       <span>{{ calendar.name }}</span>
     </a>
