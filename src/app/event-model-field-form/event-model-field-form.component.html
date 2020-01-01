@@ -1,0 +1,20 @@
+<form [formGroup]="eventFieldForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name:
+    <input type="text" formControlName="name" required />
+  </label>
+
+  <select
+    class="custom-select"
+    (change)="changeType($event)"
+    formControlName="type"
+    required
+  >
+    <option value="" disabled>Choose a field type</option>
+    <option *ngFor="let type of FieldTypes" [ngValue]="type.value">{{
+      type.label
+    }}</option>
+  </select>
+
+  <button type="submit" class="btn btn-danger btn-lg btn-block">Submit</button>
+</form>

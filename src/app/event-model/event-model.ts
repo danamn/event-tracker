@@ -11,7 +11,7 @@ export class EventModel {
   }
 }
 
-interface Field {
+export interface Field {
   name: string;
   type: "date" | "time" | "inputField" | "textField" | "dropdown" | EventType;
   categories?: string[];

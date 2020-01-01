@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { CalendarsComponent } from "./calendars/calendars.component";
@@ -8,6 +9,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { EventModelComponent } from "./event-model/event-model.component";
 import { EventsCalendarViewComponent } from "./events-calendar-view/events-calendar-view.component";
+import { EventModelFieldFormComponent } from './event-model-field-form/event-model-field-form.component';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { EventsCalendarViewComponent } from "./events-calendar-view/events-calen
     HomeComponent,
     CalendarComponent,
     EventModelComponent,
-    EventsCalendarViewComponent
+    EventsCalendarViewComponent,
+    EventModelFieldFormComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
