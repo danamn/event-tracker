@@ -1,7 +1,8 @@
-export class TrEvent {
+export interface TrEvent {
   id: string;
   typeId: string;
-  constructor(args: object) {
-    Object.keys(args).forEach(arg => (this[arg] = args[arg]));
-  }
+  [key: string]: string | Date | number;
+  // constructor(args: object) {
+  //   Object.keys(args).forEach(arg => (this[arg] = args[arg]));
+  // }
 }

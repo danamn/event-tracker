@@ -4,7 +4,7 @@ import { Location } from "@angular/common";
 import { Observable } from "rxjs";
 
 import { Calendar } from "./calendar";
-import { TrEvent } from "../model/tr-event";
+import { TrEvent } from "../../model/tr-event";
 import { CALENDARS } from "../calendars/mock-calendars";
 
 @Component({
@@ -30,16 +30,17 @@ export class CalendarComponent implements OnInit {
     );
 
     this.calendar = calendar;
-    this.events = calendar.events;
+    // this.events = calendar.events;
   }
 
   addEvent() {
-    const newEvent: TrEvent = new TrEvent({
+    const newEvent: TrEvent = {
       name: "test",
       id: "123",
-      date: new Date()
-    });
-    this.calendar.addEvent(newEvent);
+      date: new Date(),
+      typeId: "12"
+    };
+    // this.calendar.addEvent(newEvent);
   }
 
   goBack(): void {

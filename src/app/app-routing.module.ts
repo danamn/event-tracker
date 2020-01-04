@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { CalendarsComponent } from "./calendars/calendars.component";
-import { CalendarComponent } from "./calendar/calendar.component";
-import { HomeComponent } from "./home/home.component";
-import { EventModelComponent } from "./event-model/event-model.component";
-import { EventsCalendarViewComponent } from "./events-calendar-view/events-calendar-view.component";
+import { CalendarsComponent } from "./components/calendars/calendars.component";
+import { CalendarComponent } from "./components/calendar/calendar.component";
+import { HomeComponent } from "./components/home/home.component";
+import { EventModelComponent } from "./components/event-model/event-model.component";
+import { EventsCalendarViewComponent } from "./components/events-calendar-view/events-calendar-view.component";
 
 const appRoutes: Routes = [
   { path: "calendars", component: CalendarsComponent },

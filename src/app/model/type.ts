@@ -1,6 +1,7 @@
-export class EventType {
+export interface EventType {
   id: string;
-  constructor(args: object) {
-    Object.keys(args).forEach(arg => (this[arg] = args[arg]));
-  }
+  [key: string]: string | Date | number;
+  // constructor(args: object) {
+  //   Object.keys(args).forEach(arg => (this[arg] = args[arg]));
+  // }
 }

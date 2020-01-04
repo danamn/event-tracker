@@ -1,7 +1,12 @@
 import { Calendar } from "../calendar/calendar";
 
-const c1 = new Calendar("calendar 1");
-const c2 = new Calendar("calendar 2");
+// const c1 = new Calendar("calendar 1");
+// const c2 = new Calendar("calendar 2");
+const c1 = { id: "c1", name: "calendar1" };
+const c2 = {
+  id: "c2",
+  name: "calendar2"
+};
 const CALENDARS: Calendar[] = [c1, c2];
 
 export { CALENDARS };

@@ -1,8 +1,8 @@
-export class TypeModel {
-  fields: Field[];
+export interface TypeModel {
+  fields: TMField[];
 }
 
-interface Field {
+export interface TMField {
   name: string;
   type: "date" | "time" | "inputField" | "textField" | "dropdown";
   categories?: string[];
