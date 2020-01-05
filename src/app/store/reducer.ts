@@ -15,11 +15,13 @@ const appReducer = createReducer<any>(
     return { ...state, calendar };
   }),
   on(AppAction.setEventModel, (state, { eventModel }) => {
+    console.log("reducer", eventModel);
+
     return { ...state, eventModel };
   }),
   on(AppAction.setTypeModel, (state, { typeModel }) => {
     return { ...state, typeModel };
-  }),
+  })
 );
 
 export function reducer(state: State | undefined, action: Action) {

@@ -15,17 +15,18 @@ import { Observable } from "rxjs";
   styleUrls: ["./event-model.component.css"]
 })
 export class EventModelComponent implements OnInit {
-  eventModel: EventModel;
-
   eventModel$ = this.store.pipe(select(selectEventModel));
 
   constructor(private route: ActivatedRoute, private store: Store<any>) {}
 
-  ngOnInit() {
-    // this.store.pipe(select(selectEventModel), take(1)).subscribe(calendar => {
-    //   console.log(calendar);
-    //   // this.eventModel = calendar.eventModel;
-    // });
+  ngOnInit() {}
+
+  getEventModel() {
+    let evM: EventModel;
+    this.store.pipe(select(selectEventModel), take(1)).subscribe(eventModel => {
+      evM = eventModel;
+    });
+    return evM;
   }
 
   onSave() {
@@ -37,8 +38,8 @@ export class EventModelComponent implements OnInit {
   }
 
   onFieldDataChange({ fieldData, initialFieldName }) {
-    // const fields = this.eventModel;
-    const fields = [];
+    const fields = [...this.getEventModel()];
+
     if (initialFieldName) {
       const changedFieldIndex = fields.findIndex(
         f => f.name === initialFieldName
@@ -48,11 +49,6 @@ export class EventModelComponent implements OnInit {
       fields.push(fieldData);
     }
 
-    this.store.pipe(select(selectEventModel), take(1)).subscribe(evM => {
-      console.log(evM);
-      this.eventModel = evM;
-    });
-    // console.log(this.eventModel);
-    // this.store.dispatch(AppAction.setEventModel({ eventModel: fields }));
+    this.store.dispatch(AppAction.setEventModel({ eventModel: fields }));
   }
 }
