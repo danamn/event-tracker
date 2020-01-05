@@ -1,21 +1,19 @@
-<p>event-model works!</p>
-
 <h4>Event Model</h4>
 
 <div>
   <ul>
     <li *ngFor="let field of eventModel$ | async">
       {{ field.name }}
-      <app-event-model-field-form
+      <app-model-field-form
         [fieldData]="field"
         (changeFieldData)="onFieldDataChange($event)"
-      ></app-event-model-field-form>
+      ></app-model-field-form>
     </li>
   </ul>
 
   <p>Add Field</p>
-  <app-event-model-field-form
+  <app-model-field-form
     [fieldData]="null"
     (changeFieldData)="onFieldDataChange($event)"
-  ></app-event-model-field-form>
+  ></app-model-field-form>
 </div>

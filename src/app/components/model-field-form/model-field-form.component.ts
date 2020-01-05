@@ -1,23 +1,38 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Input,
+  Output,
+  Inject
+} from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { DropdownService } from "../../services/dropdown.service";
+import { DDOption, DDOPTIONS } from "../../configs/dropdown.config";
 
 import { Field } from "../event-model/event-model";
+// import { Model } from "../../model.enum";
 
 @Component({
-  selector: "app-event-model-field-form",
-  templateUrl: "./event-model-field-form.component.html",
-  styleUrls: ["./event-model-field-form.component.css"]
+  selector: "app-model-field-form",
+  templateUrl: "./model-field-form.component.html",
+  styleUrls: ["./model-field-form.component.css"]
 })
-export class EventModelFieldFormComponent implements OnInit {
-  FieldTypes: Object[] = [
-    { value: "date", label: "Date" },
-    { value: "inputField", label: "Input Field" }
-  ];
+export class ModelFieldFormComponent implements OnInit {
+  fieldTypes: DDOption[];
 
   @Input() fieldData: Field;
+  // @Input() model: Model;
   @Output() changeFieldData = new EventEmitter<object>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    @Inject(DDOPTIONS) dropdownOptions: DDOption[]
+    // private dropdownService: DropdownService
+    // this.fieldTypes = this.dropdownService.getDropdownOptions(this.model);
+  ) {
+    this.fieldTypes = dropdownOptions;
+  }
 
   ngOnInit() {
     if (this.fieldData) {

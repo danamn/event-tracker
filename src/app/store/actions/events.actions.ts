@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { TrEvent } from "../../model/tr-event";
+import { TrEvent } from "../../components/event/tr-event";
 
 export const addEvent = createAction(
   "[Events] Add Event",

@@ -4,7 +4,7 @@ import { Location } from "@angular/common";
 import { Observable } from "rxjs";
 
 import { Calendar } from "./calendar";
-import { TrEvent } from "../../model/tr-event";
+import { TrEvent } from "../event/tr-event";
 import { CALENDARS } from "../calendars/mock-calendars";
 
 @Component({

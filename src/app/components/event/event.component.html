@@ -1,0 +1,10 @@
+<p>event works!</p>
+
+<div>
+  <ul>
+    <li *ngFor="let field of eventFields">
+      Field name: {{ field.name }} Type: {{ field.type }}
+      <input type="text" value="{{ field.value }}" />
+    </li>
+  </ul>
+</div>

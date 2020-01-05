@@ -1,7 +1,7 @@
-import { TrEvent } from './tr-event';
+import { TrEvent } from "../components/event/tr-event";
 
-describe('TrEvent', () => {
-  it('should create an instance', () => {
+describe("TrEvent", () => {
+  it("should create an instance", () => {
     expect(new TrEvent()).toBeTruthy();
   });
 });

@@ -11,7 +11,7 @@
     required
   >
     <option value="" disabled>Choose a field type</option>
-    <option *ngFor="let type of FieldTypes" [ngValue]="type.value">{{
+    <option *ngFor="let type of fieldTypes" [ngValue]="type.value">{{
       type.label
     }}</option>
   </select>

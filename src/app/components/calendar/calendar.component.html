@@ -1,10 +1,19 @@
 <div class="events">
-  <a
-    class="nav-item"
-    routerLink="/calendars/{{ calendar.name }}/event-model"
-    routerLinkActive="active"
-    >Event Model</a
-  >
+  <nav>
+    <a
+      class="nav-item"
+      routerLink="/calendars/{{ calendar.name }}/event-model"
+      routerLinkActive="active"
+      >Event Model
+    </a>
+    <a
+      class="nav-item"
+      routerLink="/calendars/{{ calendar.name }}/event"
+      routerLinkActive="active"
+      >Event
+    </a>
+  </nav>
+
   Events
   <ul>
     <li *ngFor="let event of events">

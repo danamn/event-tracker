@@ -1,7 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { Calendar } from "../components/calendar/calendar";
 import { EventModel } from "../components/event-model/event-model";
-import { TrEvent } from "../model/tr-event";
+import { TrEvent } from "../components/event/tr-event";
 import { EventType } from "../model/type";
 import { TypeModel } from "../model/type-model";
 

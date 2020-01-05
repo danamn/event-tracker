@@ -12,12 +12,14 @@ import { HomeComponent } from "./components/home/home.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { EventModelComponent } from "./components/event-model/event-model.component";
 import { EventsCalendarViewComponent } from "./components/events-calendar-view/events-calendar-view.component";
-import { EventModelFieldFormComponent } from "./components/event-model-field-form/event-model-field-form.component";
+import { ModelFieldFormComponent } from "./components/model-field-form/model-field-form.component";
 import { reducer } from "./store/reducer";
-import { DROPDOWN_OPTIONS, DDOptions } from "./configs/dropdown.config";
+import { DROPDOWN_OPTIONS, DDOPTIONS } from "./configs/dropdown.config";
+import { DropdownService } from "./services/dropdown.service";
 
 import { AppEffects } from "./app.effects";
-import { environment } from "../environments/environment"; // Angular CLI environment
+import { environment } from "../environments/environment";
+import { EventComponent } from './components/event/event.component'; // Angular CLI environment
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { environment } from "../environments/environment"; // Angular CLI enviro
     CalendarComponent,
     EventModelComponent,
     EventsCalendarViewComponent,
-    EventModelFieldFormComponent
+    ModelFieldFormComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,10 @@ import { environment } from "../environments/environment"; // Angular CLI enviro
       logOnly: environment.production // Restrict extension to log-only mode
     })
   ],
-  providers: [{ provide: DDOptions, useValue: DROPDOWN_OPTIONS}],
+  providers: [
+    { provide: DDOPTIONS, useValue: DROPDOWN_OPTIONS },
+    DropdownService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
