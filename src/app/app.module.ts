@@ -13,11 +13,9 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { EventModelComponent } from "./components/event-model/event-model.component";
 import { EventsCalendarViewComponent } from "./components/events-calendar-view/events-calendar-view.component";
 import { EventModelFieldFormComponent } from "./components/event-model-field-form/event-model-field-form.component";
-import { reducer as eventModelReducer } from "./store/reducers/event-model.reducer";
-import { reducer as typeModelReducer } from "./store/reducers/type-model.reducer";
-import { reducer as eventsReducer } from "./store/reducers/events.reducer";
-import { reducer as typesReducer } from "./store/reducers/types.reducer";
-import { reducer as calendarReducer } from "./store/reducers/calendar.reducer";
+import { reducer } from "./store/reducer";
+import { DROPDOWN_OPTIONS, DDOptions } from "./configs/dropdown.config";
+
 import { AppEffects } from "./app.effects";
 import { environment } from "../environments/environment"; // Angular CLI environment
 
@@ -37,27 +35,23 @@ import { environment } from "../environments/environment"; // Angular CLI enviro
     AppRoutingModule,
     StoreModule.forRoot(
       {
-        eventModel: eventModelReducer,
-        typeModel: typeModelReducer,
-        calendar: calendarReducer,
-        types: typesReducer,
-        events: eventsReducer
+        calendarReducer: reducer
       },
       {
         // metaReducers,
         runtimeChecks: {
-          // strictStateImmutability: true,
-          // strictActionImmutability: true
+          strictStateImmutability: true,
+          strictActionImmutability: true
         }
       }
     ),
-    EffectsModule.forRoot([AppEffects]),
+    // EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production // Restrict extension to log-only mode
     })
   ],
-  providers: [],
+  providers: [{ provide: DDOptions, useValue: DROPDOWN_OPTIONS}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

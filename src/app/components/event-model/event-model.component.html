@@ -4,7 +4,7 @@
 
 <div>
   <ul>
-    <li *ngFor="let field of eventModel.fields">
+    <li *ngFor="let field of eventModel$ | async">
       {{ field.name }}
       <app-event-model-field-form
         [fieldData]="field"

@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Store, select } from "@ngrx/store";
+import { take } from "rxjs/operators";
 
-import { CALENDARS } from "../calendars/mock-calendars";
-import { Calendar } from "../calendar/calendar";
-import { EventModel, Field } from "./event-model";
+import { EventModel } from "./event-model";
 import { AppState } from "../../store/state/app.state";
-import * as EventModelAction from "../../store/actions/event-model.actions";
+import * as AppAction from "../../store/actions";
+import { selectEventModel } from "../../store/selectors";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-event-model",
@@ -14,29 +15,18 @@ import * as EventModelAction from "../../store/actions/event-model.actions";
   styleUrls: ["./event-model.component.css"]
 })
 export class EventModelComponent implements OnInit {
-  FieldTypes: String[] = ["Date", "Input field"];
   eventModel: EventModel;
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
+  eventModel$ = this.store.pipe(select(selectEventModel));
+
+  constructor(private route: ActivatedRoute, private store: Store<any>) {}
 
   ngOnInit() {
-    // this.getEventModel();
-
-    // this.eventModel = new EventModel();
-    this.eventModel = { fields: [] };
-    this.eventModel.fields = [{ name: "test", type: "date" }];
-    console.log(this.eventModel);
+    // this.store.pipe(select(selectEventModel), take(1)).subscribe(calendar => {
+    //   console.log(calendar);
+    //   // this.eventModel = calendar.eventModel;
+    // });
   }
-
-  // getEventModel(): void {
-  //   const name = this.route.snapshot.paramMap.get("name");
-
-  //   const calendar: Calendar = CALENDARS.find(
-  //     (cal: Calendar) => cal.name === name
-  //   );
-
-  //   this.eventModel = calendar.eventModel;
-  // }
 
   onSave() {
     // alert(JSON.stringify(this.eventFieldForm.value));
@@ -47,7 +37,8 @@ export class EventModelComponent implements OnInit {
   }
 
   onFieldDataChange({ fieldData, initialFieldName }) {
-    const { fields } = this.eventModel;
+    // const fields = this.eventModel;
+    const fields = [];
     if (initialFieldName) {
       const changedFieldIndex = fields.findIndex(
         f => f.name === initialFieldName
@@ -56,7 +47,12 @@ export class EventModelComponent implements OnInit {
     } else {
       fields.push(fieldData);
     }
-    console.log(this.eventModel);
-    this.store.dispatch(EventModelAction.addField({ field: fieldData }));
+
+    this.store.pipe(select(selectEventModel), take(1)).subscribe(evM => {
+      console.log(evM);
+      this.eventModel = evM;
+    });
+    // console.log(this.eventModel);
+    // this.store.dispatch(AppAction.setEventModel({ eventModel: fields }));
   }
 }
