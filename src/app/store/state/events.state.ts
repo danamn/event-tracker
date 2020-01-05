@@ -1,4 +1,4 @@
-import { TrEvent } from "../../components/event/tr-event";
+import { TrEvent } from "../../model/tr-event";
 
 // export type EventModelState = {
 //   fields: Field[];

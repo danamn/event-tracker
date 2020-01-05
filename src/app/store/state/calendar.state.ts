@@ -1,4 +1,4 @@
-import { Calendar } from "../../components/calendar/calendar";
+import { Calendar } from "../../model/calendar";
 
 export type CalendarState = {
   currentCalendar: Calendar

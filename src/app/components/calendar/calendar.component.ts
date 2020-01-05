@@ -3,8 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { Observable } from "rxjs";
 
-import { Calendar } from "./calendar";
-import { TrEvent } from "../event/tr-event";
+import { Calendar } from "../../model/calendar";
+import { TrEvent } from "../../model/tr-event";
 import { CALENDARS } from "../calendars/mock-calendars";
 
 @Component({

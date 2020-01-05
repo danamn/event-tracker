@@ -1,4 +1,4 @@
-import { EventModel, Field } from "../../components/event-model/event-model";
+import { EventModel, Field } from "../../model/event-model";
 
 // export type EventModelState = {
 //   fields: Field[];

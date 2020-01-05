@@ -1,4 +1,5 @@
-import { EventType } from "../../model/type";
+import { EventType } from "./type";
+import {ModelField} from '../model/model-field'
 
 export interface EventModel extends Array<Field> {}
 // export interface EventModel {
@@ -36,4 +37,5 @@ export interface Field {
     | ""
     | EventType;
   categories?: string[];
+  error?: string;
 }

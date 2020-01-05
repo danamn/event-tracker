@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Calendar } from "../../components/calendar/calendar";
+import { Calendar } from "../../model/calendar";
 
 export const setCalendar = createAction(
   "[Calendar] Set Calendar",

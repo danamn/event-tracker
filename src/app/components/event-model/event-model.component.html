@@ -7,6 +7,7 @@
       <app-model-field-form
         [fieldData]="field"
         (changeFieldData)="onFieldDataChange($event)"
+        [error]="error[field.name]"
       ></app-model-field-form>
     </li>
   </ul>
@@ -15,5 +16,6 @@
   <app-model-field-form
     [fieldData]="null"
     (changeFieldData)="onFieldDataChange($event)"
+    [error]="error.newField"
   ></app-model-field-form>
 </div>

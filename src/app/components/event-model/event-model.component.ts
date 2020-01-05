@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Store, select } from "@ngrx/store";
 import { take } from "rxjs/operators";
 
-import { EventModel } from "./event-model";
+import { EventModel } from "../../model/event-model";
 import { AppState } from "../../store/state/app.state";
 import * as AppAction from "../../store/actions";
 import { selectEventModel } from "../../store/selectors";
@@ -17,6 +17,8 @@ import { selectEventModel } from "../../store/selectors";
 export class EventModelComponent implements OnInit {
   // model = Model.event;
   eventModel$ = this.store.pipe(select(selectEventModel));
+  eventModel = this.getEventModel();
+  error: Object = {};
 
   constructor(private route: ActivatedRoute, private store: Store<any>) {}
 
@@ -40,16 +42,21 @@ export class EventModelComponent implements OnInit {
 
   onFieldDataChange({ fieldData, initialFieldName }) {
     const fields = [...this.getEventModel()];
+    if (fields.find(f => f.name === fieldData.name)) {
+      this.error[initialFieldName || "newField"] = "nonUniqueName";
 
-    if (initialFieldName) {
-      const changedFieldIndex = fields.findIndex(
-        f => f.name === initialFieldName
-      );
-      fields[changedFieldIndex] = fieldData;
+      console.log("name already exists");
     } else {
-      fields.push(fieldData);
+      if (initialFieldName) {
+        const changedFieldIndex = fields.findIndex(
+          f => f.name === initialFieldName
+        );
+        fields[changedFieldIndex] = fieldData;
+      } else {
+        fields.push(fieldData);
+        this.error["newField"] = "";
+      }
+      this.store.dispatch(AppAction.setEventModel({ eventModel: fields }));
     }
-
-    this.store.dispatch(AppAction.setEventModel({ eventModel: fields }));
   }
 }

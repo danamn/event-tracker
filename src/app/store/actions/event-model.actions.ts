@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Field } from "../../components/event-model/event-model";
+import { Field } from "../../model/event-model";
 
 export const addField = createAction(
   "[EventModel] Add Field",

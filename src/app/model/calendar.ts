@@ -1,8 +1,8 @@
 import guid from "uuid/v1";
-import { EventType } from "../../model/type";
-import { TypeModel } from "../../model/type-model";
-import { TrEvent } from "../event/tr-event";
-import { EventModel } from "../event-model/event-model";
+import { EventType } from "./type";
+import { TypeModel } from "./type-model";
+import { TrEvent } from "./tr-event";
+import { EventModel } from "./event-model";
 
 export interface Calendar {
   id: string;

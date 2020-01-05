@@ -1,4 +1,4 @@
-import { Calendar } from "../calendar/calendar";
+import { Calendar } from "../../model/calendar";
 
 // const c1 = new Calendar("calendar 1");
 // const c2 = new Calendar("calendar 2");

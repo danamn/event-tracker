@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { take } from "rxjs/operators";
 
-import { EventModel } from "../event-model/event-model";
-import { TrEvent } from "./tr-event";
+import { EventModel } from "../../model/event-model";
+import { TrEvent } from "../../model/tr-event";
 import { selectEventModel } from "../../store/selectors";
 
 interface eventField {

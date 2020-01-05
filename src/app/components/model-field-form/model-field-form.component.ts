@@ -10,7 +10,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { DropdownService } from "../../services/dropdown.service";
 import { DDOption, DDOPTIONS } from "../../configs/dropdown.config";
 
-import { Field } from "../event-model/event-model";
+import { Field } from "../../model/event-model";
 // import { Model } from "../../model.enum";
 
 @Component({
@@ -24,6 +24,7 @@ export class ModelFieldFormComponent implements OnInit {
   @Input() fieldData: Field;
   // @Input() model: Model;
   @Output() changeFieldData = new EventEmitter<object>();
+  @Input() error: string;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +39,8 @@ export class ModelFieldFormComponent implements OnInit {
     if (this.fieldData) {
       this.type.setValue(this.fieldData.type);
       this.name.setValue(this.fieldData.name);
+
+      // this.error = this.fieldData.error;
     }
   }
 
@@ -54,7 +57,7 @@ export class ModelFieldFormComponent implements OnInit {
 
   onSubmit() {
     this.changeFieldData.emit({
-      fieldData: this.eventFieldForm.value,
+      fieldData: { ...this.eventFieldForm.value, error: "" },
       initialFieldName: this.fieldData && this.fieldData.name
     });
   }

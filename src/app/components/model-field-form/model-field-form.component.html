@@ -3,7 +3,7 @@
     Name:
     <input type="text" formControlName="name" required />
   </label>
-
+  <div *ngIf="error">{{ error }}</div>
   <select
     class="custom-select"
     (change)="changeType($event)"
