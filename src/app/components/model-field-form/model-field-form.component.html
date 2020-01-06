@@ -4,12 +4,7 @@
     <input type="text" formControlName="name" required />
   </label>
   <div *ngIf="error">{{ error }}</div>
-  <select
-    class="custom-select"
-    (change)="changeType($event)"
-    formControlName="type"
-    required
-  >
+  <select class="custom-select" formControlName="type" required>
     <option value="" disabled>Choose a field type</option>
     <option *ngFor="let type of fieldTypes" [ngValue]="type.value">{{
       type.label

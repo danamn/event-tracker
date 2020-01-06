@@ -15,11 +15,11 @@ import { EventsCalendarViewComponent } from "./components/events-calendar-view/e
 import { ModelFieldFormComponent } from "./components/model-field-form/model-field-form.component";
 import { reducer } from "./store/reducer";
 import { DROPDOWN_OPTIONS, DDOPTIONS } from "./configs/dropdown.config";
-import { DropdownService } from "./services/dropdown.service";
+import { GenerateIdService } from "./services/generate-id.service";
 
 import { AppEffects } from "./app.effects";
 import { environment } from "../environments/environment";
-import { EventComponent } from './components/event/event.component'; // Angular CLI environment
+import { EventComponent } from "./components/event/event.component"; // Angular CLI environment
 
 @NgModule({
   declarations: [
@@ -56,7 +56,7 @@ import { EventComponent } from './components/event/event.component'; // Angular 
   ],
   providers: [
     { provide: DDOPTIONS, useValue: DROPDOWN_OPTIONS },
-    DropdownService
+    GenerateIdService
   ],
   bootstrap: [AppComponent]
 })

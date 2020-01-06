@@ -7,7 +7,6 @@ import {
   Inject
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { DropdownService } from "../../services/dropdown.service";
 import { DDOption, DDOPTIONS } from "../../configs/dropdown.config";
 
 import { Field } from "../../model/event-model";
@@ -49,15 +48,15 @@ export class ModelFieldFormComponent implements OnInit {
     type: ["", [Validators.required]]
   });
 
-  changeType(e) {
-    this.type.setValue(e.target.value, {
-      onlySelf: true
-    });
-  }
+  // changeType(e) {
+  //   this.type.setValue(e.target.value, {
+  //     onlySelf: true
+  //   });
+  // }
 
   onSubmit() {
     this.changeFieldData.emit({
-      fieldData: { ...this.eventFieldForm.value, error: "" },
+      fieldData: this.eventFieldForm.value,
       initialFieldName: this.fieldData && this.fieldData.name
     });
   }

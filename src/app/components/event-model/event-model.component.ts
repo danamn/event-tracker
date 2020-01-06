@@ -42,9 +42,11 @@ export class EventModelComponent implements OnInit {
 
   onFieldDataChange({ fieldData, initialFieldName }) {
     const fields = [...this.getEventModel()];
-    if (fields.find(f => f.name === fieldData.name)) {
-      this.error[initialFieldName || "newField"] = "nonUniqueName";
+    const fieldWithSameName = fields.find(f => f.name === fieldData.name);
+    // console.log(initialFieldName, nonUniqueName);
 
+    if (fieldWithSameName && initialFieldName !== fieldWithSameName.name) {
+      this.error[initialFieldName || "newField"] = "nonUniqueName";
       console.log("name already exists");
     } else {
       if (initialFieldName) {
@@ -52,6 +54,7 @@ export class EventModelComponent implements OnInit {
           f => f.name === initialFieldName
         );
         fields[changedFieldIndex] = fieldData;
+        this.error[initialFieldName] = "";
       } else {
         fields.push(fieldData);
         this.error["newField"] = "";

@@ -1,4 +1,5 @@
 - form validations
 - delete confirmation pop-up
-- delete model enum
-- check model fields for unique names
+- remove model enum
+- DONE - check model fields for unique names 
+- field error type

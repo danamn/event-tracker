@@ -20,7 +20,11 @@ const appRoutes: Routes = [
     component: EventModelComponent
   },
   {
-    path: "calendars/:name/event",
+    path: "calendars/:name/event/:id",
+    component: EventComponent
+  },
+  {
+    path: "calendars/:name/add-event",
     component: EventComponent
   },
   // {

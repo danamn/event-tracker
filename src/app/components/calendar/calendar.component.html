@@ -8,7 +8,7 @@
     </a>
     <a
       class="nav-item"
-      routerLink="/calendars/{{ calendar.name }}/event"
+      routerLink="/calendars/{{ calendar.name }}/event/1"
       routerLinkActive="active"
       >Event
     </a>
@@ -22,7 +22,12 @@
   </ul>
 
   <div class="buttons">
-    <button (click)="addEvent()">Add Event</button>
+    <button
+      (click)="addEvent()"
+      routerLink="/calendars/{{ calendar.name }}/add-event"
+    >
+      Add Event
+    </button>
     <button (click)="goBack()">Back</button>
   </div>
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
-import { Observable } from "rxjs";
 
 import { Calendar } from "../../model/calendar";
 import { TrEvent } from "../../model/tr-event";
@@ -34,12 +33,12 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent() {
-    const newEvent: TrEvent = {
-      name: "test",
-      id: "123",
-      date: new Date(),
-      typeId: "12"
-    };
+    // const newEvent: TrEvent = {
+    //   name: "test",
+    //   id: "123",
+    //   date: new Date(),
+    //   typeId: "12"
+    // };
     // this.calendar.addEvent(newEvent);
   }
 
