@@ -20,6 +20,11 @@ export const addEvent = createAction(
   props<{ trEvent: TrEvent }>()
 );
 
+export const editEvent = createAction(
+  "Edit Event",
+  props<{ trEvent: TrEvent; eventId: string }>()
+);
+
 export const setEventModel = createAction(
   "Set Event Model",
   props<{ eventModel: EventModel }>()

@@ -8,6 +8,17 @@ const appReducer = createReducer<any>(
   on(AppAction.addEvent, (state, { trEvent }) => {
     return { ...state, events: [...state.events, trEvent] };
   }),
+  on(AppAction.editEvent, (state, { trEvent, eventId }) => {
+    const editedEventIndex = state.events.findIndex(ev => ev.id === eventId);
+    return {
+      ...state,
+      events: [
+        ...state.events.slice(0, editedEventIndex),
+        trEvent,
+        ...state.events.slice(editedEventIndex + 1)
+      ]
+    };
+  }),
   on(AppAction.addType, (state, { eventType }) => {
     return { ...state, types: [...state.types, eventType] };
   }),

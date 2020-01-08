@@ -2,9 +2,15 @@ import { createSelector, createFeatureSelector } from "@ngrx/store";
 
 import { State } from "./state";
 
-export const selectCurrentCalendar = createFeatureSelector<State>(
-  "calendarReducer"
-);
+// export const selectCurrentCalendar = createFeatureSelector<State>(
+//   "calendarReducer"
+// );
+
+export interface AppState {
+  calendarReducer: State;
+}
+
+export const selectCurrentCalendar = (state: AppState) => state.calendarReducer;
 
 export const selectCalendar = createSelector(
   selectCurrentCalendar,
@@ -15,9 +21,12 @@ export const selectCalendar = createSelector(
 export const selectEvents = createSelector(
   selectCurrentCalendar,
   (state: State) => {
+    console.log(state.events);
+
     return state.events;
   }
 );
+
 export const selectTypes = createSelector(
   selectCurrentCalendar,
   (state: State) => {

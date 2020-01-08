@@ -1,12 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { take } from "rxjs/operators";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from "@angular/common";
+
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { EventModel } from "../../model/event-model";
 import { TrEvent } from "../../model/tr-event";
 import { selectEventModel, selectEvents } from "../../store/selectors";
+import * as AppAction from "../../store/actions";
+
 import { GenerateIdService } from "src/app/services/generate-id.service";
 import { ModelFieldFormComponent } from "../model-field-form/model-field-form.component";
 
@@ -22,24 +26,26 @@ interface eventField {
   styleUrls: ["./event.component.css"]
 })
 export class EventComponent implements OnInit {
-  eventModel$ = this.store.pipe(select(selectEventModel));
+  // eventModel$ = this.store.pipe(select(selectEventModel));
   // events$ = this.store.pipe(select(selectEvents));
   eventFields: eventField[] = [];
   eventData: TrEvent;
   formData: FormGroup;
-  // eventId: string;
+  eventId: string;
 
   constructor(
     private store: Store<any>,
     private route: ActivatedRoute,
-    private id: GenerateIdService,
+    // private router: Router,
+    private location: Location,
+    private generateId: GenerateIdService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     const urlId = this.route.snapshot.paramMap.get("id");
     if (urlId) {
-      // this.eventId = urlId;
+      this.eventId = urlId;
       this.eventData = this.getEventData(urlId);
     }
     this.getEventFields();
@@ -84,6 +90,24 @@ export class EventComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.formData.value);
+    const trEvent = {
+      ...this.formData.value,
+      id: this.eventId || this.generateId.getId(),
+      typeId: "123"
+    };
+
+    if (this.eventId) {
+      this.store.dispatch(
+        AppAction.editEvent({
+          trEvent,
+          eventId: this.eventId
+        })
+      );
+    } else {
+      this.store.dispatch(AppAction.addEvent({ trEvent }));
+    }
+    this.location.back();
+
+    // this.router.navigate(['/']);
   }
 }

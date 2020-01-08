@@ -15,10 +15,14 @@
   </nav>
 
   Events
+
   <ul>
-    <li *ngFor="let event of events">
-      {{ event.date }}
-    </li>
+    <a
+      *ngFor="let event of events$ | async"
+      routerLink="/calendars/{{ calendar.name }}/event/{{ event.id }}"
+    >
+      {{ event.name }}
+    </a>
   </ul>
 
   <div class="buttons">

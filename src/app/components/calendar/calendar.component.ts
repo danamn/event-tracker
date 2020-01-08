@@ -2,6 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
+import { Store, select } from "@ngrx/store";
+import { selectEvents, AppState } from "../../store/selectors";
+import { State } from "../../store/state";
+import { Observable } from "rxjs";
+
 import { Calendar } from "../../model/calendar";
 import { TrEvent } from "../../model/tr-event";
 import { CALENDARS } from "../calendars/mock-calendars";
@@ -14,10 +19,16 @@ import { CALENDARS } from "../calendars/mock-calendars";
 export class CalendarComponent implements OnInit {
   // calendar$: Observable<Calendar>;
   calendar: Calendar;
-  events: TrEvent[];
-  constructor(private route: ActivatedRoute, private location: Location) {}
+  events$: Observable<TrEvent[]>;
+
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
+    this.events$ = this.store.pipe(select(selectEvents));
     this.getCalendar();
   }
 
@@ -29,17 +40,6 @@ export class CalendarComponent implements OnInit {
     );
 
     this.calendar = calendar;
-    // this.events = calendar.events;
-  }
-
-  addEvent() {
-    // const newEvent: TrEvent = {
-    //   name: "test",
-    //   id: "123",
-    //   date: new Date(),
-    //   typeId: "12"
-    // };
-    // this.calendar.addEvent(newEvent);
   }
 
   goBack(): void {
