@@ -6,10 +6,10 @@ import {
   Output,
   Inject
 } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormControl } from "@angular/forms";
 import { DDOption, DDOPTIONS } from "../../configs/dropdown.config";
 
-import { Field } from "../../model/event-model";
+import { ModelField } from "../../model/model-field";
 // import { Model } from "../../model.enum";
 
 @Component({
@@ -20,25 +20,27 @@ import { Field } from "../../model/event-model";
 export class ModelFieldFormComponent implements OnInit {
   fieldTypes: DDOption[];
 
-  @Input() fieldData: Field;
-  // @Input() model: Model;
+  @Input() fieldData: ModelField;
   @Output() changeFieldData = new EventEmitter<object>();
   @Input() error: string;
 
   constructor(
     private fb: FormBuilder,
     @Inject(DDOPTIONS) dropdownOptions: DDOption[]
-    // private dropdownService: DropdownService
-    // this.fieldTypes = this.dropdownService.getDropdownOptions(this.model);
   ) {
     this.fieldTypes = dropdownOptions;
   }
 
   ngOnInit() {
     if (this.fieldData) {
-      this.type.setValue(this.fieldData.type);
       this.name.setValue(this.fieldData.name);
-
+      if (this.fieldData.name === "type") {
+        this.name.disable();
+        this.type.disable();
+      } else {
+        this.name.setValue(this.fieldData.name);
+        this.type.setValue(this.fieldData.type);
+      }
       // this.error = this.fieldData.error;
     }
   }

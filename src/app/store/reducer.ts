@@ -30,8 +30,8 @@ const appReducer = createReducer<any>(
 
     return { ...state, eventModel };
   }),
-  on(AppAction.setTypeModel, (state, { typeModel }) => {
-    return { ...state, typeModel };
+  on(AppAction.setTypeModel, (state, { eventTypeModel }) => {
+    return { ...state, eventTypeModel };
   })
 );
 

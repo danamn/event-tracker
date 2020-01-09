@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { Store, select } from "@ngrx/store";
+import { Location } from "@angular/common";
 import { take } from "rxjs/operators";
 
-import { EventModel } from "../../model/event-model";
-import { AppState } from "../../store/state/app.state";
+import { AppState } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
+import { DataModel } from "../../model/data-model";
+import { ModelField } from "../../model/model-field";
 import { selectEventModel } from "../../store/selectors";
-// import { Model } from "../../model.enum";
 
 @Component({
   selector: "app-event-model",
@@ -15,51 +15,25 @@ import { selectEventModel } from "../../store/selectors";
   styleUrls: ["./event-model.component.css"]
 })
 export class EventModelComponent implements OnInit {
-  // model = Model.event;
-  eventModel$ = this.store.pipe(select(selectEventModel));
-  eventModel = this.getEventModel();
-  error: Object = {};
+  formData: DataModel;
 
-  constructor(private route: ActivatedRoute, private store: Store<any>) {}
+  constructor(private location: Location, private store: Store<AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formData = this.getEventModel();
+  }
 
   getEventModel() {
-    let evM: EventModel;
+    let evM: DataModel;
+
     this.store.pipe(select(selectEventModel), take(1)).subscribe(eventModel => {
       evM = eventModel;
     });
     return evM;
   }
 
-  onSave() {
-    // alert(JSON.stringify(this.eventFieldForm.value));
-    // const newField: Field = this.eventFieldForm.value;
-    // this.eventModel.addField(newField);
-    // console.log("EV", this.eventModel);
-    // this.store.dispatch(EventModelAction.addField(newField));
-  }
-
-  onFieldDataChange({ fieldData, initialFieldName }) {
-    const fields = [...this.getEventModel()];
-    const fieldWithSameName = fields.find(f => f.name === fieldData.name);
-    // console.log(initialFieldName, nonUniqueName);
-
-    if (fieldWithSameName && initialFieldName !== fieldWithSameName.name) {
-      this.error[initialFieldName || "newField"] = "nonUniqueName";
-      console.log("name already exists");
-    } else {
-      if (initialFieldName) {
-        const changedFieldIndex = fields.findIndex(
-          f => f.name === initialFieldName
-        );
-        fields[changedFieldIndex] = fieldData;
-        this.error[initialFieldName] = "";
-      } else {
-        fields.push(fieldData);
-        this.error["newField"] = "";
-      }
-      this.store.dispatch(AppAction.setEventModel({ eventModel: fields }));
-    }
+  handleSave(eventModel) {
+    this.store.dispatch(AppAction.setEventModel({ eventModel }));
+    this.location.back();
   }
 }

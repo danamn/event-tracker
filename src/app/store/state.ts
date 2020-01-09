@@ -1,12 +1,12 @@
 import { Calendar } from "../model/calendar";
-import { EventModel } from "../model/event-model";
+import { DataModel } from "../model/data-model";
 import { TrEvent } from "../model/tr-event";
 import { EventType } from "../model/type";
 import { TypeModel } from "../model/type-model";
 
 export type State = {
   calendar: Calendar;
-  eventModel: EventModel;
+  eventModel: DataModel;
   eventTypeModel: TypeModel;
   events: TrEvent[];
   types: EventType[];
@@ -15,7 +15,7 @@ export type State = {
 export const initialState: State = {
   calendar: null,
   eventModel: [
-    { name: "test", type: "date" },
+    { name: "type", type: "eventType" },
     { name: "name", type: "date" }
   ],
   eventTypeModel: [],

@@ -19,7 +19,9 @@ import { GenerateIdService } from "./services/generate-id.service";
 
 import { AppEffects } from "./app.effects";
 import { environment } from "../environments/environment";
-import { EventComponent } from "./components/event/event.component"; // Angular CLI environment
+import { EventComponent } from "./components/event/event.component";
+import { TypeModelComponent } from './components/type-model/type-model.component';
+import { ModelFormComponent } from './components/model-form/model-form.component'; // Angular CLI environment
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { EventComponent } from "./components/event/event.component"; // Angular 
     EventModelComponent,
     EventsCalendarViewComponent,
     ModelFieldFormComponent,
-    EventComponent
+    EventComponent,
+    TypeModelComponent,
+    ModelFormComponent
   ],
   imports: [
     BrowserModule,

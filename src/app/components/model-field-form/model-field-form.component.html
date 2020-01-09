@@ -4,12 +4,18 @@
     <input type="text" formControlName="name" required />
   </label>
   <div *ngIf="error">{{ error }}</div>
-  <select class="custom-select" formControlName="type" required>
+  <select class="custom-select" formControlName="type">
     <option value="" disabled>Choose a field type</option>
     <option *ngFor="let type of fieldTypes" [ngValue]="type.value">{{
       type.label
     }}</option>
   </select>
 
-  <button type="submit" class="btn btn-danger btn-lg btn-block">Submit</button>
+  <button
+    *ngIf="fieldData ? fieldData.name !== 'type' : true"
+    type="submit"
+    class="btn btn-danger btn-lg btn-block"
+  >
+    Submit
+  </button>
 </form>

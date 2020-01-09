@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Calendar } from "../model/calendar";
-import { EventModel } from "../model/event-model";
+import { DataModel } from "../model/data-model";
 import { TrEvent } from "../model/tr-event";
 import { EventType } from "../model/type";
 import { TypeModel } from "../model/type-model";
@@ -27,10 +27,10 @@ export const editEvent = createAction(
 
 export const setEventModel = createAction(
   "Set Event Model",
-  props<{ eventModel: EventModel }>()
+  props<{ eventModel: DataModel }>()
 );
 
 export const setTypeModel = createAction(
   "[EventModel] Set Fields",
-  props<{ typeModel: TypeModel }>()
+  props<{ eventTypeModel: TypeModel }>()
 );

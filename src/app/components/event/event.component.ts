@@ -6,7 +6,7 @@ import { Location } from "@angular/common";
 
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { EventModel } from "../../model/event-model";
+import { DataModel } from "../../model/data-model";
 import { TrEvent } from "../../model/tr-event";
 import { selectEventModel, selectEvents } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
@@ -82,7 +82,7 @@ export class EventComponent implements OnInit {
   }
 
   getEventModel() {
-    let evM: EventModel;
+    let evM: DataModel;
     this.store.pipe(select(selectEventModel), take(1)).subscribe(eventModel => {
       evM = eventModel;
     });
