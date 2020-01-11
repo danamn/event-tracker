@@ -1,0 +1,12 @@
+<p>entry works!</p>
+
+<form [formGroup]="formData" (ngSubmit)="onSave()">
+  <div *ngFor="let field of entryFields">
+    <label>
+      {{ field.fieldName }}
+      <input type="text" [formControlName]="field.fieldName" required />
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-danger btn-lg btn-block">Save</button>
+</form>

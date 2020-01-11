@@ -21,7 +21,10 @@ import { AppEffects } from "./app.effects";
 import { environment } from "../environments/environment";
 import { EventComponent } from "./components/event/event.component";
 import { TypeModelComponent } from './components/type-model/type-model.component';
-import { ModelFormComponent } from './components/model-form/model-form.component'; // Angular CLI environment
+import { ModelFormComponent } from './components/model-form/model-form.component';
+import { EntryComponent } from './components/entry/entry.component';
+import { TypeComponent } from './components/type/type.component';
+import { TypesComponent } from './components/types/types.component'; // Angular CLI environment
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { ModelFormComponent } from './components/model-form/model-form.component
     ModelFieldFormComponent,
     EventComponent,
     TypeModelComponent,
-    ModelFormComponent
+    ModelFormComponent,
+    EntryComponent,
+    TypeComponent,
+    TypesComponent
   ],
   imports: [
     BrowserModule,

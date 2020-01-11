@@ -8,7 +8,7 @@ import { State } from "../../store/state";
 import { Observable } from "rxjs";
 
 import { Calendar } from "../../model/calendar";
-import { TrEvent } from "../../model/tr-event";
+import { Entry } from "../../model/entry";
 import { CALENDARS } from "../calendars/mock-calendars";
 
 @Component({
@@ -19,7 +19,7 @@ import { CALENDARS } from "../calendars/mock-calendars";
 export class CalendarComponent implements OnInit {
   // calendar$: Observable<Calendar>;
   calendar: Calendar;
-  events$: Observable<TrEvent[]>;
+  events$: Observable<Entry[]>;
 
   constructor(
     private route: ActivatedRoute,

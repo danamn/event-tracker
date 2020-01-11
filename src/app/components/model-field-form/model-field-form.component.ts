@@ -61,6 +61,10 @@ export class ModelFieldFormComponent implements OnInit {
       fieldData: this.eventFieldForm.value,
       initialFieldName: this.fieldData && this.fieldData.name
     });
+    if (!this.fieldData) {
+      this.name.setValue("");
+      this.type.setValue("");
+    }
   }
 
   get type() {

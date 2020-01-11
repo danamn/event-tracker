@@ -6,22 +6,22 @@ import { Location } from "@angular/common";
 
 import { Entry } from "../../model/entry";
 import {
-  selectEventModel,
-  selectEvents,
+  selectEventTypeModel,
+  selectTypes,
   AppState
 } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
 
 @Component({
-  selector: "app-event",
-  templateUrl: "./event.component.html",
-  styleUrls: ["./event.component.css"]
+  selector: "app-type",
+  templateUrl: "./type.component.html",
+  styleUrls: ["./type.component.css"]
 })
-export class EventComponent implements OnInit {
-  eventModel$ = this.store.pipe(select(selectEventModel));
+export class TypeComponent implements OnInit {
+  typeModel$ = this.store.pipe(select(selectEventTypeModel));
 
-  eventData: Entry;
-  eventId: string;
+  typeData: Entry;
+  typeId: string;
 
   constructor(
     private store: Store<AppState>,
@@ -33,33 +33,33 @@ export class EventComponent implements OnInit {
   ngOnInit() {
     const urlId = this.route.snapshot.paramMap.get("id");
     if (urlId) {
-      this.eventId = urlId;
-      this.eventData = this.getEventData(urlId);
+      this.typeId = urlId;
+      this.typeData = this.getTypeData(urlId);
     }
     // this.getEventFields();
     // this.generateFormFields();
   }
 
-  getEventData(id: string): Entry {
-    let events: Entry[];
-    this.store.pipe(select(selectEvents), take(1)).subscribe(e => {
-      events = e;
+  getTypeData(id: string): Entry {
+    let types: Entry[];
+    this.store.pipe(select(selectTypes), take(1)).subscribe(e => {
+      types = e;
     });
 
-    const currentEvent = events.find(ev => ev.id === id);
-    return currentEvent;
+    const currentType = types.find(ev => ev.id === id);
+    return currentType;
   }
 
-  handleSave(trEvent) {
-    if (this.eventId) {
+  handleSave(eventType) {
+    if (this.typeId) {
       this.store.dispatch(
-        AppAction.editEvent({
-          trEvent,
-          eventId: this.eventId
+        AppAction.editType({
+          eventType,
+          typeId: this.typeId
         })
       );
     } else {
-      this.store.dispatch(AppAction.addEvent({ trEvent }));
+      this.store.dispatch(AppAction.addType({ eventType }));
     }
     this.location.back();
 

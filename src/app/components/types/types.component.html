@@ -1,0 +1,17 @@
+Types
+
+<ul>
+  <a
+    *ngFor="let type of types$ | async"
+    routerLink="/calendars/{{ (calendar$ | async)?.name }}/type/{{ type.id }}"
+  >
+    {{ type.name }}
+  </a>
+</ul>
+
+<div class="buttons">
+  <button routerLink="/calendars/{{ (calendar$ | async)?.name }}/add-type">
+    Add Type
+  </button>
+  <button (click)="goBack()">Back</button>
+</div>

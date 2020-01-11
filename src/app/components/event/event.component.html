@@ -1,15 +1,10 @@
-<p>event works!</p>
+<app-entry
+  [entryData]="eventData"
+  [entryModel]="eventModel$ | async"
+  (handleSave)="handleSave($event)"
+></app-entry>
 
-<!-- <div>
-  <ul>
-    <li *ngFor="let field of eventFields">
-      Field name: {{ field.name }} Type: {{ field.type }}
-      <input type="text" value="{{ field.value }}" />
-    </li>
-  </ul>
-</div> -->
-
-<form [formGroup]="formData" (ngSubmit)="onSave()">
+<!-- <form [formGroup]="formData" (ngSubmit)="onSave()">
   <div *ngFor="let field of eventFields">
     <label>
       {{ field.name }}
@@ -18,4 +13,4 @@
   </div>
 
   <button type="submit" class="btn btn-danger btn-lg btn-block">Save</button>
-</form>
+</form> -->

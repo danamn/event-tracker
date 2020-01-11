@@ -7,6 +7,8 @@ import { HomeComponent } from "./components/home/home.component";
 import { EventModelComponent } from "./components/event-model/event-model.component";
 import { TypeModelComponent } from "./components/type-model/type-model.component";
 import { EventComponent } from "./components/event/event.component";
+import { TypesComponent } from "./components/types/types.component";
+import { TypeComponent } from "./components/type/type.component";
 import { EventsCalendarViewComponent } from "./components/events-calendar-view/events-calendar-view.component";
 
 const appRoutes: Routes = [
@@ -31,6 +33,18 @@ const appRoutes: Routes = [
   {
     path: "calendars/:name/add-event",
     component: EventComponent
+  },
+  {
+    path: "calendars/:name/types",
+    component: TypesComponent
+  },
+  {
+    path: "calendars/:name/type/:id",
+    component: TypeComponent
+  },
+  {
+    path: "calendars/:name/add-type",
+    component: TypeComponent
   },
   // {
   //   path: 'heroes',

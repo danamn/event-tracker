@@ -18,6 +18,12 @@
       routerLinkActive="active"
       >Event
     </a>
+    <a
+      class="nav-item"
+      routerLink="/calendars/{{ calendar.name }}/types"
+      routerLinkActive="active"
+      >Types
+    </a>
   </nav>
 
   Events
@@ -32,10 +38,7 @@
   </ul>
 
   <div class="buttons">
-    <button
-      (click)="addEvent()"
-      routerLink="/calendars/{{ calendar.name }}/add-event"
-    >
+    <button routerLink="/calendars/{{ calendar.name }}/add-event">
       Add Event
     </button>
     <button (click)="goBack()">Back</button>
