@@ -1,3 +1,15 @@
+<form [formGroup]="eventTypeSelector">
+  <label>
+    Event Type
+    <select class="custom-select" formControlName="type">
+      <option [ngValue]="'default'">Default</option>
+      <option *ngFor="let type of types$ | async" [ngValue]="type.id">{{
+        type.name
+      }}</option>
+    </select>
+  </label>
+</form>
+
 <app-entry
   [entryData]="eventData"
   [entryModel]="eventModel$ | async"

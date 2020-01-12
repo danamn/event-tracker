@@ -3,11 +3,13 @@ import { Store, select } from "@ngrx/store";
 import { take } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
+import { FormGroup, FormControl } from "@angular/forms";
 
 import { Entry } from "../../model/entry";
 import {
   selectEventModel,
   selectEvents,
+  selectTypes,
   AppState
 } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
@@ -19,9 +21,14 @@ import * as AppAction from "../../store/actions";
 })
 export class EventComponent implements OnInit {
   eventModel$ = this.store.pipe(select(selectEventModel));
+  types$ = this.store.pipe(select(selectTypes));
 
   eventData: Entry;
   eventId: string;
+
+  eventTypeSelector = new FormGroup({
+    type: new FormControl("")
+  });
 
   constructor(
     private store: Store<AppState>,
@@ -35,6 +42,9 @@ export class EventComponent implements OnInit {
     if (urlId) {
       this.eventId = urlId;
       this.eventData = this.getEventData(urlId);
+      this.eventTypeSelector.get("type").setValue(this.eventData.typeId);
+    } else {
+      this.eventTypeSelector.get("type").setValue("default");
     }
     // this.getEventFields();
     // this.generateFormFields();
@@ -51,15 +61,21 @@ export class EventComponent implements OnInit {
   }
 
   handleSave(trEvent) {
+    console.log(this.eventTypeSelector.value);
+
+    const eventWithType = {
+      ...trEvent,
+      typeId: this.eventTypeSelector.value.type
+    };
     if (this.eventId) {
       this.store.dispatch(
         AppAction.editEvent({
-          trEvent,
+          trEvent: eventWithType,
           eventId: this.eventId
         })
       );
     } else {
-      this.store.dispatch(AppAction.addEvent({ trEvent }));
+      this.store.dispatch(AppAction.addEvent({ trEvent: eventWithType }));
     }
     this.location.back();
 

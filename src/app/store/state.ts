@@ -15,10 +15,13 @@ export type State = {
 export const initialState: State = {
   calendar: { id: "c1", name: "calendar1" },
   eventModel: [
-    { name: "type", type: "eventType" },
-    { name: "name", type: "date" }
+    { name: "name", type: "date" },
+    { name: "day", type: "date" }
   ],
-  eventTypeModel: [{ name: "name", type: "date" }],
-  events: [{ test: "abc", id: "1", typeId: "1", name: "yes" }],
+  eventTypeModel: [
+    { name: "name", type: "inputField" },
+    { name: "phone", type: "inputField" }
+  ],
+  events: [],
   types: []
 };
