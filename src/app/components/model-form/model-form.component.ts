@@ -31,6 +31,12 @@ export class ModelFormComponent implements OnInit {
     this.handleSave.emit(this.currentFields);
   }
 
+  onDeleteField(event, name) {
+    this.currentFields = this.currentFields.filter(
+      field => field.name !== name
+    );
+  }
+
   onFieldDataChange({ fieldData, initialFieldName }) {
     // const fields = [...this.getEventModel()];
     const fields = [...this.currentFields];

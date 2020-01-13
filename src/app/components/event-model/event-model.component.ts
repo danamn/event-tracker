@@ -28,7 +28,6 @@ export class EventModelComponent implements OnInit {
       ];
       // this.formData.push({ name: "type", type: ModelFieldType.eventType });
     }
-    console.log(this.formData);
   }
 
   getEventModel() {

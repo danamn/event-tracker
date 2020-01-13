@@ -1,21 +1,29 @@
 <div>
-        <ul>
-          <li *ngFor="let field of currentFields">
-            {{ field.name }}
-            <app-model-field-form
-              [fieldData]="field"
-              (changeFieldData)="onFieldDataChange($event)"
-              [error]="error[field.name]"
-            ></app-model-field-form>
-          </li>
-        </ul>
-      
-        <p>Add Field</p>
-        <app-model-field-form
-          [fieldData]="null"
-          (changeFieldData)="onFieldDataChange($event)"
-          [error]="error.newField"
-        ></app-model-field-form>
-      </div>
-      
-      <button (click)="onSave($event)">Save</button>
+  <ul>
+    <li *ngFor="let field of currentFields">
+      {{ field.name }}
+      <app-model-field-form
+        [fieldData]="field"
+        (changeFieldData)="onFieldDataChange($event)"
+        [error]="error[field.name]"
+      ></app-model-field-form>
+      <button
+        *ngIf="field.type !== 'eventType'"
+        type="button"
+        class="btn btn-danger btn-lg btn-block"
+        (click)="onDeleteField($event, field.name)"
+      >
+        Delete
+      </button>
+    </li>
+  </ul>
+
+  <p>Add Field</p>
+  <app-model-field-form
+    [fieldData]="null"
+    (changeFieldData)="onFieldDataChange($event)"
+    [error]="error.newField"
+  ></app-model-field-form>
+</div>
+
+<button (click)="onSave($event)">Save</button>

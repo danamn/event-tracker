@@ -6,7 +6,6 @@ import { take } from "rxjs/operators";
 import { AppState } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
 import { DataModel } from "../../model/data-model";
-import { ModelField } from "../../model/model-field";
 import { selectEventTypeModel } from "../../store/selectors";
 
 @Component({
@@ -29,8 +28,6 @@ export class TypeModelComponent implements OnInit {
     this.store
       .pipe(select(selectEventTypeModel), take(1))
       .subscribe(typeModel => {
-        console.log(tM);
-
         tM = typeModel;
       });
     return tM;
