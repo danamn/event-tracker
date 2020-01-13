@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 import { Calendar } from "../../model/calendar";
 import { Entry } from "../../model/entry";
 import { CALENDARS } from "../calendars/mock-calendars";
+import * as AppAction from "../../store/actions";
 
 @Component({
   selector: "app-calendar",
@@ -40,6 +41,10 @@ export class CalendarComponent implements OnInit {
     );
 
     this.calendar = calendar;
+  }
+
+  deleteEvent(event, id) {
+    this.store.dispatch(AppAction.deleteEvent({ eventId: id }));
   }
 
   goBack(): void {

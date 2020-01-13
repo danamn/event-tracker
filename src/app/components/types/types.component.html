@@ -1,12 +1,15 @@
 Types
 
 <ul>
-  <a
-    *ngFor="let type of types$ | async"
-    routerLink="/calendars/{{ (calendar$ | async)?.name }}/type/{{ type.id }}"
-  >
+  <li *ngFor="let type of types$ | async">
     {{ type.name }}
-  </a>
+    <button
+      routerLink="/calendars/{{ (calendar$ | async)?.name }}/type/{{ type.id }}"
+    >
+      Edit
+    </button>
+    <button (click)="deleteType($event, type.id)">Delete</button>
+  </li>
 </ul>
 
 <div class="buttons">

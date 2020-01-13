@@ -29,12 +29,13 @@
   Events
 
   <ul>
-    <a
-      *ngFor="let event of events$ | async"
-      routerLink="/calendars/{{ calendar.name }}/event/{{ event.id }}"
-    >
+    <li *ngFor="let event of events$ | async">
       {{ event.name }}
-    </a>
+      <button routerLink="/calendars/{{ calendar.name }}/event/{{ event.id }}">
+        Edit
+      </button>
+      <button (click)="deleteEvent($event, event.id)">Delete</button>
+    </li>
   </ul>
 
   <div class="buttons">

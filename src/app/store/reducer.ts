@@ -24,6 +24,11 @@ const appReducer = createReducer<any>(
     return state;
   }),
 
+  on(AppAction.deleteEvent, (state, { eventId }) => {
+    const updatedEvents = state.events.filter(ev => ev.id !== eventId);
+    return { ...state, events: updatedEvents };
+  }),
+
   on(AppAction.addType, (state, { eventType }) => {
     return { ...state, types: [...state.types, eventType] };
   }),
@@ -42,6 +47,11 @@ const appReducer = createReducer<any>(
       };
     }
     return state;
+  }),
+
+  on(AppAction.deleteType, (state, { typeId }) => {
+    const updatedTypes = state.types.filter(ev => ev.id !== typeId);
+    return { ...state, types: updatedTypes };
   }),
 
   on(AppAction.setCalendar, (state, { calendar }) => {

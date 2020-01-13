@@ -15,12 +15,21 @@ export const editType = createAction(
   "Edit Type",
   props<{ eventType: Entry; typeId: string }>()
 );
+export const deleteType = createAction(
+  "Delete Type",
+  props<{ typeId: string }>()
+);
 
 export const addEvent = createAction("Add Event", props<{ trEvent: Entry }>());
 
 export const editEvent = createAction(
   "Edit Event",
   props<{ trEvent: Entry; eventId: string }>()
+);
+
+export const deleteEvent = createAction(
+  "Delete Event",
+  props<{ eventId: string }>()
 );
 
 export const setEventModel = createAction(

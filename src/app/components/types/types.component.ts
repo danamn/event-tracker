@@ -3,6 +3,7 @@ import { Store, select } from "@ngrx/store";
 import { Location } from "@angular/common";
 
 import { selectCalendar, selectTypes, AppState } from "../../store/selectors";
+import * as AppAction from "../../store/actions";
 
 @Component({
   selector: "app-types",
@@ -16,6 +17,10 @@ export class TypesComponent implements OnInit {
   constructor(private store: Store<AppState>, private location: Location) {}
 
   ngOnInit() {}
+
+  deleteType(event, id) {
+    this.store.dispatch(AppAction.deleteType({ typeId: id }));
+  }
   goBack(): void {
     this.location.back();
   }

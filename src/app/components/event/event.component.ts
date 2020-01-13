@@ -61,8 +61,6 @@ export class EventComponent implements OnInit {
   }
 
   handleSave(trEvent) {
-    console.log(this.eventTypeSelector.value);
-
     const eventWithType = {
       ...trEvent,
       typeId: this.eventTypeSelector.value.type
