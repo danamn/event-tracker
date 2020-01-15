@@ -1,9 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Store, select } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 
 import { DataModel } from "../../model/data-model";
-import { ModelField } from "../../model/model-field";
 import * as Selectors from "../../store/selectors";
 
 @Component({
@@ -13,7 +11,8 @@ import * as Selectors from "../../store/selectors";
 })
 export class ModelFormComponent implements OnInit {
   @Input() formData: DataModel;
-  @Output() handleSave = new EventEmitter<DataModel>();
+  @Input() titleField: String;
+  @Output() handleSave = new EventEmitter<object>();
 
   currentFields: DataModel;
   error: Object = {};
@@ -24,40 +23,51 @@ export class ModelFormComponent implements OnInit {
     this.currentFields = this.formData;
   }
 
-  onSave() {
-    // this.store.dispatch(
-    //   AppAction.setEventModel({ eventModel: this.currentFields })
-    // );
-    this.handleSave.emit(this.currentFields);
+  onSetTitleField(event, fieldName) {
+    this.titleField = fieldName;
   }
 
   onDeleteField(event, name) {
     this.currentFields = this.currentFields.filter(
       field => field.name !== name
     );
+    if (this.titleField === name) {
+      this.titleField = "";
+    }
   }
 
   onFieldDataChange({ fieldData, initialFieldName }) {
-    // const fields = [...this.getEventModel()];
     const fields = [...this.currentFields];
     const fieldWithSameName = fields.find(f => f.name === fieldData.name);
-    // console.log(initialFieldName, nonUniqueName);
 
     if (fieldWithSameName && initialFieldName !== fieldWithSameName.name) {
       this.error[initialFieldName || "newField"] = "nonUniqueName";
       console.log("name already exists");
     } else {
+      // If field edit
       if (initialFieldName) {
         const changedFieldIndex = fields.findIndex(
           f => f.name === initialFieldName
         );
         fields[changedFieldIndex] = fieldData;
         this.error[initialFieldName] = "";
+        // If field add
       } else {
         fields.push(fieldData);
         this.error["newField"] = "";
       }
       this.currentFields = fields;
+    }
+  }
+
+  onSave() {
+    if (!this.titleField) {
+      alert("you need a title field");
+    } else {
+      this.handleSave.emit({
+        dataModel: this.currentFields,
+        titleField: this.titleField
+      });
     }
   }
 }

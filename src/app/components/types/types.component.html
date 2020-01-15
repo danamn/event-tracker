@@ -2,7 +2,7 @@ Types
 
 <ul>
   <li *ngFor="let type of types$ | async">
-    {{ type.name }}
+    {{ type[titleField$ | async] }}
     <button
       routerLink="/calendars/{{ (calendar$ | async)?.name }}/type/{{ type.id }}"
     >

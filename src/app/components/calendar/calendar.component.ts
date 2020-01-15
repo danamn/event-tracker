@@ -3,7 +3,11 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Store, select } from "@ngrx/store";
-import { selectEvents, AppState } from "../../store/selectors";
+import {
+  selectEvents,
+  AppState,
+  selectEventTitleField
+} from "../../store/selectors";
 import { State } from "../../store/state";
 import { Observable } from "rxjs";
 
@@ -21,6 +25,7 @@ export class CalendarComponent implements OnInit {
   // calendar$: Observable<Calendar>;
   calendar: Calendar;
   events$: Observable<Entry[]>;
+  titleField$ = this.store.pipe(select(selectEventTitleField));
 
   constructor(
     private route: ActivatedRoute,

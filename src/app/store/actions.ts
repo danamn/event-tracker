@@ -41,3 +41,13 @@ export const setTypeModel = createAction(
   "[EventModel] Set Fields",
   props<{ eventTypeModel: TypeModel }>()
 );
+
+export const setEventTitleField = createAction(
+  "Set Event Title Field",
+  props<{ titleField: string }>()
+);
+
+export const setTypeTitleField = createAction(
+  "Set Type Title Field",
+  props<{ titleField: string }>()
+);

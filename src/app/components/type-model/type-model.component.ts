@@ -6,7 +6,10 @@ import { take } from "rxjs/operators";
 import { AppState } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
 import { DataModel } from "../../model/data-model";
-import { selectEventTypeModel } from "../../store/selectors";
+import {
+  selectEventTypeModel,
+  selectTypeTitleField
+} from "../../store/selectors";
 
 @Component({
   selector: "app-type-model",
@@ -15,6 +18,7 @@ import { selectEventTypeModel } from "../../store/selectors";
 })
 export class TypeModelComponent implements OnInit {
   formData: DataModel;
+  titleField$ = this.store.pipe(select(selectTypeTitleField));
 
   constructor(private location: Location, private store: Store<AppState>) {}
 
@@ -33,8 +37,9 @@ export class TypeModelComponent implements OnInit {
     return tM;
   }
 
-  handleSave(eventTypeModel) {
-    this.store.dispatch(AppAction.setTypeModel({ eventTypeModel }));
+  handleSave({ dataModel, titleField }) {
+    this.store.dispatch(AppAction.setTypeModel({ eventTypeModel: dataModel }));
+    this.store.dispatch(AppAction.setTypeTitleField({ titleField }));
     this.location.back();
   }
 }

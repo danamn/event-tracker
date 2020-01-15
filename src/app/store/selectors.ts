@@ -30,3 +30,13 @@ export const selectEventModel = createSelector(
   selectCurrentCalendar,
   (state: State) => state.eventModel
 );
+
+export const selectEventTitleField = createSelector(
+  selectCurrentCalendar,
+  (state: State) => state.eventTitleField
+);
+
+export const selectTypeTitleField = createSelector(
+  selectCurrentCalendar,
+  (state: State) => state.typeTitleField
+);

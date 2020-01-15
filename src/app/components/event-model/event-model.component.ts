@@ -7,7 +7,7 @@ import { AppState } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
 import { DataModel } from "../../model/data-model";
 import { ModelField, ModelFieldType } from "../../model/model-field";
-import { selectEventModel } from "../../store/selectors";
+import { selectEventModel, selectEventTitleField } from "../../store/selectors";
 
 @Component({
   selector: "app-event-model",
@@ -16,6 +16,7 @@ import { selectEventModel } from "../../store/selectors";
 })
 export class EventModelComponent implements OnInit {
   formData: DataModel;
+  titleField$ = this.store.pipe(select(selectEventTitleField));
 
   constructor(private location: Location, private store: Store<AppState>) {}
 
@@ -26,7 +27,6 @@ export class EventModelComponent implements OnInit {
         ...this.formData,
         { name: "type", type: ModelFieldType.eventType }
       ];
-      // this.formData.push({ name: "type", type: ModelFieldType.eventType });
     }
   }
 
@@ -46,9 +46,10 @@ export class EventModelComponent implements OnInit {
     );
   }
 
-  handleSave(eventModel: DataModel): void {
-    if (this.hasEventType(eventModel)) {
-      this.store.dispatch(AppAction.setEventModel({ eventModel }));
+  handleSave({ dataModel, titleField }): void {
+    if (this.hasEventType(dataModel)) {
+      this.store.dispatch(AppAction.setEventModel({ eventModel: dataModel }));
+      this.store.dispatch(AppAction.setEventTitleField({ titleField }));
       this.location.back();
     } else {
       console.log("the event model doesn't have a type field");

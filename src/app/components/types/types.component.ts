@@ -2,7 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { Location } from "@angular/common";
 
-import { selectCalendar, selectTypes, AppState } from "../../store/selectors";
+import {
+  selectCalendar,
+  selectTypes,
+  AppState,
+  selectTypeTitleField
+} from "../../store/selectors";
 import * as AppAction from "../../store/actions";
 
 @Component({
@@ -13,6 +18,7 @@ import * as AppAction from "../../store/actions";
 export class TypesComponent implements OnInit {
   calendar$ = this.store.pipe(select(selectCalendar));
   types$ = this.store.pipe(select(selectTypes));
+  titleField$ = this.store.pipe(select(selectTypeTitleField));
 
   constructor(private store: Store<AppState>, private location: Location) {}
 

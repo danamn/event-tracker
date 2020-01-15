@@ -64,6 +64,13 @@ const appReducer = createReducer<any>(
 
   on(AppAction.setTypeModel, (state, { eventTypeModel }) => {
     return { ...state, eventTypeModel };
+  }),
+
+  on(AppAction.setEventTitleField, (state, { titleField }) => {
+    return { ...state, eventTitleField: titleField };
+  }),
+  on(AppAction.setTypeTitleField, (state, { titleField }) => {
+    return { ...state, typeTitleField: titleField };
   })
 );
 

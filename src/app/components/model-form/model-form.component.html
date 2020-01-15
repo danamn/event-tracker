@@ -7,6 +7,16 @@
         (changeFieldData)="onFieldDataChange($event)"
         [error]="error[field.name]"
       ></app-model-field-form>
+
+      <label [for]="field.name + '-isTitle'">Is this the title field?</label>
+      <input
+        type="radio"
+        [checked]="titleField === field.name"
+        (change)="onSetTitleField(event$, field.name)"
+        [id]="field.name + '-isTitle'"
+        [name]="isTitle"
+      />
+
       <button
         *ngIf="field.type !== 'eventType'"
         type="button"

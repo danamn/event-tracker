@@ -10,6 +10,8 @@ export type State = {
   eventTypeModel: TypeModel;
   events: Entry[];
   types: Entry[];
+  eventTitleField: string;
+  typeTitleField: string;
 };
 
 export const initialState: State = {
@@ -19,9 +21,11 @@ export const initialState: State = {
     { name: "day", type: "date" }
   ],
   eventTypeModel: [
-    { name: "name", type: "inputField" },
-    { name: "phone", type: "inputField" }
+    // { name: "name", type: "inputField", isTitle: false },
+    // { name: "phone", type: "inputField", isTitle: false }
   ],
   events: [],
-  types: []
+  types: [],
+  eventTitleField: "",
+  typeTitleField: ""
 };

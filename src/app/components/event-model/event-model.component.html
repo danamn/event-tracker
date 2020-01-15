@@ -3,4 +3,5 @@
 <app-model-form
   [formData]="formData"
   (handleSave)="handleSave($event)"
+  [titleField]="titleField$ | async"
 ></app-model-form>
