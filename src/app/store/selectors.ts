@@ -1,42 +1,42 @@
 import { createSelector, createFeatureSelector } from "@ngrx/store";
 
-import { State } from "./state";
+import { Calendar } from "../model/calendar";
 
 export interface AppState {
-  calendarReducer: State;
+  calendarReducer: Calendar;
 }
 
 export const selectCurrentCalendar = (state: AppState) => state.calendarReducer;
 
 export const selectCalendar = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.calendar
+  (state: Calendar) => state.calendarMetadata
 );
 export const selectEvents = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.events
+  (state: Calendar) => state.events
 );
 
 export const selectTypes = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.types
+  (state: Calendar) => state.types
 );
 export const selectEventTypeModel = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.eventTypeModel
+  (state: Calendar) => state.eventTypeModel
 );
 
 export const selectEventModel = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.eventModel
+  (state: Calendar) => state.eventModel
 );
 
 export const selectEventTitleField = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.eventTitleField
+  (state: Calendar) => state.eventTitleField
 );
 
 export const selectTypeTitleField = createSelector(
   selectCurrentCalendar,
-  (state: State) => state.typeTitleField
+  (state: Calendar) => state.typeTitleField
 );

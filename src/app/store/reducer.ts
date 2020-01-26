@@ -1,7 +1,8 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
 import * as AppAction from "./actions";
-import { State, initialState } from "./state";
+import { initialState } from "./state";
+import { Calendar } from "../model/calendar";
 
 const appReducer = createReducer<any>(
   initialState,
@@ -54,8 +55,8 @@ const appReducer = createReducer<any>(
     return { ...state, types: updatedTypes };
   }),
 
-  on(AppAction.setCalendar, (state, { calendar }) => {
-    return { ...state, calendar };
+  on(AppAction.setCalendarMetadata, (state, { calendarMetadata }) => {
+    return { ...state, calendarMetadata };
   }),
 
   on(AppAction.setEventModel, (state, { eventModel }) => {
@@ -74,6 +75,6 @@ const appReducer = createReducer<any>(
   })
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: Calendar | undefined, action: Action) {
   return appReducer(state, action);
 }

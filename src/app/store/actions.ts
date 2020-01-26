@@ -1,53 +1,69 @@
 import { createAction, props } from "@ngrx/store";
-import { Calendar } from "../model/calendar";
+import { CalendarMetadata } from "../model/calendar-metadata";
 import { DataModel } from "../model/data-model";
 import { Entry } from "../model/entry";
 import { TypeModel } from "../model/type-model";
 
-export const setCalendar = createAction(
-  "Set Calendar",
-  props<{ calendar: Calendar }>()
+export const createCalendar = createAction(
+  "[Calendar] Create Calendar",
+  props<{ calendarName: String }>()
 );
 
-export const addType = createAction("Add Type", props<{ eventType: Entry }>());
+export const loadCalendar = createAction(
+  "[Calendar] Load Calendar",
+  props<{ calendarId: String }>()
+);
+
+export const setCalendarMetadata = createAction(
+  "[Calendar] Set Calendar metadata",
+  props<{ calendarMetadata: CalendarMetadata }>()
+);
+
+export const addType = createAction(
+  "[Type] Add Type",
+  props<{ eventType: Entry }>()
+);
 
 export const editType = createAction(
-  "Edit Type",
+  "[Type] Edit Type",
   props<{ eventType: Entry; typeId: string }>()
 );
 export const deleteType = createAction(
-  "Delete Type",
+  "[Type] Delete Type",
   props<{ typeId: string }>()
 );
 
-export const addEvent = createAction("Add Event", props<{ trEvent: Entry }>());
+export const addEvent = createAction(
+  "[Event] Add Event",
+  props<{ trEvent: Entry }>()
+);
 
 export const editEvent = createAction(
-  "Edit Event",
+  "[Event] Edit Event",
   props<{ trEvent: Entry; eventId: string }>()
 );
 
 export const deleteEvent = createAction(
-  "Delete Event",
+  "[Event] Delete Event",
   props<{ eventId: string }>()
 );
 
 export const setEventModel = createAction(
-  "Set Event Model",
+  "[Event Model] Set Event Model",
   props<{ eventModel: DataModel }>()
 );
 
 export const setTypeModel = createAction(
-  "[EventModel] Set Fields",
+  "[Type Model] Set Fields",
   props<{ eventTypeModel: TypeModel }>()
 );
 
 export const setEventTitleField = createAction(
-  "Set Event Title Field",
+  "[Event Title Field] Set Event Title Field",
   props<{ titleField: string }>()
 );
 
 export const setTypeTitleField = createAction(
-  "Set Type Title Field",
+  "[Type Title Field] Set Type Title Field",
   props<{ titleField: string }>()
 );

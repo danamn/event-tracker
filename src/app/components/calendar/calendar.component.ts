@@ -8,10 +8,10 @@ import {
   AppState,
   selectEventTitleField
 } from "../../store/selectors";
-import { State } from "../../store/state";
+// import { Calendar } from "../../store/state";
 import { Observable } from "rxjs";
 
-import { Calendar } from "../../model/calendar";
+import { CalendarMetadata } from "../../model/calendar-metadata";
 import { Entry } from "../../model/entry";
 import { CALENDARS } from "../calendars/mock-calendars";
 import * as AppAction from "../../store/actions";
@@ -23,7 +23,7 @@ import * as AppAction from "../../store/actions";
 })
 export class CalendarComponent implements OnInit {
   // calendar$: Observable<Calendar>;
-  calendar: Calendar;
+  calendar: CalendarMetadata;
   events$: Observable<Entry[]>;
   titleField$ = this.store.pipe(select(selectEventTitleField));
 
@@ -41,8 +41,8 @@ export class CalendarComponent implements OnInit {
   getCalendar(): void {
     const name = this.route.snapshot.paramMap.get("name");
 
-    const calendar: Calendar = CALENDARS.find(
-      (cal: Calendar) => cal.name === name
+    const calendar: CalendarMetadata = CALENDARS.find(
+      (cal: CalendarMetadata) => cal.name === name
     );
 
     this.calendar = calendar;
@@ -54,5 +54,11 @@ export class CalendarComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  create(): void {
+    console.log("click");
+    
+    this.store.dispatch(AppAction.createCalendar({ calendarName: "tstName" }));
   }
 }
