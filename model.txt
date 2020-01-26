@@ -1,4 +1,5 @@
-{calendars: [
+{calendars: {
+	calendarId1:
 	{
 	calendarId: String,
 	calendarName: String,
@@ -34,4 +35,4 @@
 		}
 	]}
 	}
-]}
+}

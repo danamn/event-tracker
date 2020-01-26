@@ -9,51 +9,64 @@ import { TypeModelComponent } from "./components/type-model/type-model.component
 import { EventComponent } from "./components/event/event.component";
 import { TypesComponent } from "./components/types/types.component";
 import { TypeComponent } from "./components/type/type.component";
+import { LoginComponent } from "./components/login/login.component";
+import { RegisterComponent } from "./components/register/register.component";
+// import { UserComponent } from "./components/user/user.component";
 import { EventsCalendarViewComponent } from "./components/events-calendar-view/events-calendar-view.component";
+// import { UserResolver } from "./components/user/user.resolver";
+import { AuthGuard } from "./services/auth.guard";
+import { LoginRedirect } from "./services/login-redirect";
 
 const appRoutes: Routes = [
-  { path: "calendars", component: CalendarsComponent },
-  { path: "calendars/:name", component: CalendarComponent },
+  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "login", component: LoginComponent, canActivate: [LoginRedirect] },
   {
-    path: "calendars/:name/calendar-view",
-    component: EventsCalendarViewComponent
+    path: "register",
+    component: RegisterComponent,
+    canActivate: [LoginRedirect]
   },
   {
-    path: "calendars/:name/event-model",
-    component: EventModelComponent
-  },
-  {
-    path: "calendars/:name/type-model",
-    component: TypeModelComponent
-  },
-  {
-    path: "calendars/:name/event/:id",
-    component: EventComponent
-  },
-  {
-    path: "calendars/:name/add-event",
-    component: EventComponent
-  },
-  {
-    path: "calendars/:name/types",
-    component: TypesComponent
-  },
-  {
-    path: "calendars/:name/type/:id",
-    component: TypeComponent
-  },
-  {
-    path: "calendars/:name/add-type",
-    component: TypeComponent
-  },
-  // {
-  //   path: 'heroes',
-  //   component: HeroListComponent,
-  //   data: { title: 'Heroes List' }
-  // },
-  { path: "", component: HomeComponent }
-  // { path: "", redirectTo: "/heroes", pathMatch: "full" }
-  // { path: '**', component: PageNotFoundComponent }
+    path: "calendars",
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", component: CalendarsComponent },
+      { path: ":name", component: CalendarComponent },
+      {
+        path: ":name/calendar-view",
+        component: EventsCalendarViewComponent
+      },
+      {
+        path: ":name/event-model",
+        component: EventModelComponent
+      },
+      {
+        path: ":name/type-model",
+        component: TypeModelComponent
+      },
+      {
+        path: ":name/event/:id",
+        component: EventComponent
+      },
+      {
+        path: ":name/add-event",
+        component: EventComponent
+      },
+      {
+        path: ":name/types",
+        component: TypesComponent
+      },
+      {
+        path: ":name/type/:id",
+        component: TypeComponent
+      },
+      {
+        path: ":name/add-type",
+        component: TypeComponent
+      }
+    ]
+  }
+
+  // { path: "user", component: UserComponent, resolve: { data: UserResolver } }
 ];
 
 @NgModule({
