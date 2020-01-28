@@ -41,16 +41,17 @@ export class TypeComponent implements OnInit {
   }
 
   getTypeData(id: string): Entry {
-    let types: Entry[];
+    let types: Record<string, Entry>;
     this.store.pipe(select(selectTypes), take(1)).subscribe(e => {
       types = e;
     });
 
-    const currentType = types.find(ev => ev.id === id);
+    // const currentType = types.find(ev => ev.id === id);
+    const currentType = types[id];
     return currentType;
   }
 
-  handleSave(eventType) {
+  handleSave({ entry: eventType, id }) {
     if (this.typeId) {
       this.store.dispatch(
         AppAction.editType({
@@ -59,7 +60,7 @@ export class TypeComponent implements OnInit {
         })
       );
     } else {
-      this.store.dispatch(AppAction.addType({ eventType }));
+      this.store.dispatch(AppAction.addType({ eventType, typeId: id }));
     }
     this.location.back();
 

@@ -51,16 +51,17 @@ export class EventComponent implements OnInit {
   }
 
   getEventData(id: string): Entry {
-    let events: Entry[];
+    let events: Record<string, Entry>;
     this.store.pipe(select(selectEvents), take(1)).subscribe(e => {
       events = e;
     });
 
-    const currentEvent = events.find(ev => ev.id === id);
+    // const currentEvent = events.find(ev => ev.id === id);
+    const currentEvent = events[id];
     return currentEvent;
   }
 
-  handleSave(trEvent) {
+  handleSave({ entry: trEvent, id }) {
     const eventWithType = {
       ...trEvent,
       typeId: this.eventTypeSelector.value.type
@@ -73,7 +74,12 @@ export class EventComponent implements OnInit {
         })
       );
     } else {
-      this.store.dispatch(AppAction.addEvent({ trEvent: eventWithType }));
+      this.store.dispatch(
+        AppAction.addEvent({
+          trEvent: eventWithType,
+          eventId: id
+        })
+      );
     }
     this.location.back();
 

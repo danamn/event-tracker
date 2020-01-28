@@ -3,9 +3,11 @@
     Event Type
     <select class="custom-select" formControlName="type">
       <option [ngValue]="'default'">Default</option>
-      <option *ngFor="let type of types$ | async" [ngValue]="type.id">{{
-        type.name
-      }}</option>
+      <option
+        *ngFor="let type of types$ | async | keyvalue"
+        [ngValue]="type.key"
+        >{{ type.name }}</option
+      >
     </select>
   </label>
 </form>

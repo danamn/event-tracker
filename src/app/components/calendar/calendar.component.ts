@@ -24,7 +24,7 @@ import * as AppAction from "../../store/actions";
 export class CalendarComponent implements OnInit {
   // calendar$: Observable<Calendar>;
   calendar: CalendarMetadata;
-  events$: Observable<Entry[]>;
+  events$: Observable<Record<string, Entry>>;
   titleField$ = this.store.pipe(select(selectEventTitleField));
 
   constructor(
@@ -58,7 +58,7 @@ export class CalendarComponent implements OnInit {
 
   create(): void {
     console.log("click");
-    
+
     this.store.dispatch(AppAction.createCalendar({ calendarName: "tstName" }));
   }
 }

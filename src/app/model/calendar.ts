@@ -7,8 +7,10 @@ export interface Calendar {
   calendarMetadata: CalendarMetadata;
   eventModel: DataModel;
   eventTypeModel: TypeModel;
-  events: Entry[];
-  types: Entry[];
+  // events: Entry[];
+  events: Record<string, Entry>;
+  // types: Entry[];
+  types: Record<string, Entry>;
   eventTitleField: string;
   typeTitleField: string;
 }

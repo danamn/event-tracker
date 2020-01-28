@@ -16,7 +16,7 @@ import { EntryField } from "src/app/model/entry-field";
 export class EntryComponent implements OnInit {
   @Input() entryData: Entry;
   @Input() entryModel: DataModel;
-  @Output() handleSave = new EventEmitter<Entry>();
+  @Output() handleSave = new EventEmitter<Object>();
 
   formData: FormGroup;
   entryFields: EntryField[] = [];
@@ -50,10 +50,10 @@ export class EntryComponent implements OnInit {
   }
 
   onSave() {
+    const id = (this.entryData && this.entryData.id) || this.generateId.getId();
     const entry: Entry = {
-      ...this.formData.value,
-      id: (this.entryData && this.entryData.id) || this.generateId.getId()
+      ...this.formData.value
     };
-    this.handleSave.emit(entry);
+    this.handleSave.emit({ entry, id });
   }
 }

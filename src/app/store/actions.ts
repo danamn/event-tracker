@@ -21,7 +21,7 @@ export const setCalendarMetadata = createAction(
 
 export const addType = createAction(
   "[Type] Add Type",
-  props<{ eventType: Entry }>()
+  props<{ eventType: Entry; typeId: string }>()
 );
 
 export const editType = createAction(
@@ -35,7 +35,7 @@ export const deleteType = createAction(
 
 export const addEvent = createAction(
   "[Event] Add Event",
-  props<{ trEvent: Entry }>()
+  props<{ trEvent: Entry; eventId: string }>()
 );
 
 export const editEvent = createAction(

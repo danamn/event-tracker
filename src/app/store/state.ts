@@ -10,8 +10,8 @@ export const initialState: Calendar = {
     // { name: "name", type: "inputField", isTitle: false },
     // { name: "phone", type: "inputField", isTitle: false }
   ],
-  events: [],
-  types: [],
+  events: {},
+  types: {},
   eventTitleField: "",
   typeTitleField: ""
 };
