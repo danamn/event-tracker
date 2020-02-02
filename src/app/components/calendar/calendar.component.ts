@@ -16,6 +16,9 @@ import { Entry } from "../../model/entry";
 import { CALENDARS } from "../calendars/mock-calendars";
 import * as AppAction from "../../store/actions";
 
+import { FirebaseService } from "../../services/firebase.service";
+import { UserService } from "../../services/user.service";
+
 @Component({
   selector: "app-calendar",
   templateUrl: "./calendar.component.html",
@@ -30,7 +33,9 @@ export class CalendarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private fb: FirebaseService,
+    private user: UserService
   ) {}
 
   ngOnInit(): void {
@@ -57,8 +62,9 @@ export class CalendarComponent implements OnInit {
   }
 
   create(): void {
-    console.log("click");
-
-    this.store.dispatch(AppAction.createCalendar({ calendarName: "tstName" }));
+    this.user.getUserFromStorage();
+    // console.log("click");
+    // this.email$ = this.fb.getUsers();
+    // this.store.dispatch(AppAction.createCalendar({ calendarName: "tstName" }));
   }
 }

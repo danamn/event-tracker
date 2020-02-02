@@ -8,7 +8,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-// import { AngularFireDatabase } from "@angular/fire/database";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -38,6 +38,7 @@ import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { AuthGuard } from "./services/auth.guard";
 import { LoginRedirect } from "./services/login-redirect";
+import { FirebaseService } from "./services/firebase.service";
 
 @NgModule({
   declarations: [
@@ -81,8 +82,8 @@ import { LoginRedirect } from "./services/login-redirect";
       logOnly: environment.production // Restrict extension to log-only mode
     }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule // imports firebase/auth, only needed for auth features
-    // AngularFireDatabase
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireDatabaseModule
   ],
   providers: [
     { provide: DDOPTIONS, useValue: DROPDOWN_OPTIONS },
@@ -91,7 +92,8 @@ import { LoginRedirect } from "./services/login-redirect";
     UserService,
     // UserResolver,
     AuthGuard,
-    LoginRedirect
+    LoginRedirect,
+    FirebaseService
   ],
   bootstrap: [AppComponent]
 })

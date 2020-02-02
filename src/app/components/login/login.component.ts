@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router, Params } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "page-login",
@@ -15,7 +16,8 @@ export class LoginComponent {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private user: UserService
   ) {
     this.createForm();
   }
@@ -29,6 +31,10 @@ export class LoginComponent {
 
   tryGoogleLogin() {
     this.authService.doGoogleLogin().then(res => {
+      const {
+        user: { uid }
+      } = res;
+      this.user.storeUser(uid);
       this.router.navigate(["/calendars"]);
     });
   }

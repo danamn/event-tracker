@@ -8,3 +8,7 @@ export interface Entry {
 }
 // import { EntryField } from "./entry-field";
 // export interface Entry extends Array<EntryField> {}
+
+export interface Entries {
+  [key: string]: Entry;
+}
