@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
 import { FirebaseService } from "../../services/firebase.service";
 import { UserService } from "../../services/user.service";
 
@@ -18,11 +17,10 @@ export class RegisterComponent {
   email$: Observable<any>;
 
   constructor(
-    public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private firebase: FirebaseService,
-    private user: UserService
+    private userService: UserService
   ) {
     this.createForm();
   }
@@ -35,13 +33,15 @@ export class RegisterComponent {
   }
 
   tryGoogleLogin() {
-    this.authService.doGoogleLogin().then(
+    this.userService.doGoogleLogin().then(
       res => {
+        console.log("log in wuth google");
+
         const {
           user: { uid, email }
         } = res;
         this.firebase.createUser(uid, email);
-        this.user.storeUser(uid);
+        this.userService.storeUser(uid);
         this.router.navigate(["/calendars"]);
       },
       err => console.log(err)
@@ -49,7 +49,7 @@ export class RegisterComponent {
   }
 
   tryRegister(value) {
-    this.authService.doRegister(value).then(
+    this.userService.doRegister(value).then(
       res => {
         console.log(res);
         this.errorMessage = "";

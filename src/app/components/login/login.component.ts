@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { Router, Params } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../services/auth.service";
 import { UserService } from "../../services/user.service";
 
 @Component({
@@ -14,10 +13,9 @@ export class LoginComponent {
   errorMessage: string = "";
 
   constructor(
-    public authService: AuthService,
+    public userService: UserService,
     private router: Router,
-    private fb: FormBuilder,
-    private user: UserService
+    private fb: FormBuilder
   ) {
     this.createForm();
   }
@@ -30,17 +28,13 @@ export class LoginComponent {
   }
 
   tryGoogleLogin() {
-    this.authService.doGoogleLogin().then(res => {
-      const {
-        user: { uid }
-      } = res;
-      this.user.storeUser(uid);
+    this.userService.doGoogleLogin().then(res => {
       this.router.navigate(["/calendars"]);
     });
   }
 
   tryLogin(value) {
-    this.authService.doLogin(value).then(
+    this.userService.doLogin(value).then(
       res => {
         this.router.navigate(["/calendars"]);
       },

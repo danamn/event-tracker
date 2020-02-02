@@ -34,7 +34,6 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { UserComponent } from "./components/user/user.component"; // Angular CLI environment
 // import { UserResolver } from "./components/user/user.resolver";
-import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { AuthGuard } from "./services/auth.guard";
 import { LoginRedirect } from "./services/login-redirect";
@@ -88,7 +87,6 @@ import { FirebaseService } from "./services/firebase.service";
   providers: [
     { provide: DDOPTIONS, useValue: DROPDOWN_OPTIONS },
     GenerateIdService,
-    AuthService,
     UserService,
     // UserResolver,
     AuthGuard,
