@@ -22,11 +22,12 @@ export class EventModelComponent implements OnInit {
 
   ngOnInit() {
     this.formData = this.getEventModel();
-    if (!this.hasEventType(this.formData)) {
-      this.formData = [
-        ...this.formData,
-        { name: "type", type: ModelFieldType.eventType }
-      ];
+    const typeField = { name: "type", type: ModelFieldType.eventType };
+
+    if (!this.formData) {
+      this.formData = [typeField];
+    } else if (!this.hasEventType(this.formData)) {
+      this.formData = [...this.formData, typeField];
     }
   }
 
@@ -36,6 +37,7 @@ export class EventModelComponent implements OnInit {
     this.store.pipe(select(selectEventModel), take(1)).subscribe(eventModel => {
       evM = eventModel;
     });
+
     return evM;
   }
 
@@ -48,7 +50,9 @@ export class EventModelComponent implements OnInit {
 
   handleSave({ dataModel, titleField }): void {
     if (this.hasEventType(dataModel)) {
-      this.store.dispatch(AppAction.setEventModel({ eventModel: dataModel }));
+      console.log(dataModel);
+
+      this.store.dispatch(AppAction.saveEventModel({ eventModel: dataModel }));
       this.store.dispatch(AppAction.setEventTitleField({ titleField }));
       this.location.back();
     } else {

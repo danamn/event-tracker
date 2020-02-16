@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { FirebaseService } from "../../services/firebase.service";
 import { UserService } from "../../services/user.service";
 
 @Component({
@@ -19,7 +18,6 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private firebase: FirebaseService,
     private userService: UserService
   ) {
     this.createForm();
@@ -35,13 +33,6 @@ export class RegisterComponent {
   tryGoogleLogin() {
     this.userService.doGoogleLogin().then(
       res => {
-        console.log("log in wuth google");
-
-        const {
-          user: { uid, email }
-        } = res;
-        this.firebase.createUser(uid, email);
-        this.userService.storeUser(uid);
         this.router.navigate(["/calendars"]);
       },
       err => console.log(err)

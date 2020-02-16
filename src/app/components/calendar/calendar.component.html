@@ -2,25 +2,19 @@
   <nav>
     <a
       class="nav-item"
-      routerLink="/calendars/{{ calendar.name }}/event-model"
+      routerLink="/calendars/{{ calendarName$ | async }}/event-model"
       routerLinkActive="active"
       >Event Model
     </a>
     <a
       class="nav-item"
-      routerLink="/calendars/{{ calendar.name }}/type-model"
+      routerLink="/calendars/{{ calendarName$ | async }}/type-model"
       routerLinkActive="active"
       >Type Model
     </a>
     <a
       class="nav-item"
-      routerLink="/calendars/{{ calendar.name }}/event/1"
-      routerLinkActive="active"
-      >Event
-    </a>
-    <a
-      class="nav-item"
-      routerLink="/calendars/{{ calendar.name }}/types"
+      routerLink="/calendars/{{ calendarName$ | async }}/types"
       routerLinkActive="active"
       >Types
     </a>
@@ -31,7 +25,11 @@
   <ul>
     <li *ngFor="let event of events$ | async | keyvalue">
       {{ event.value[titleField$ | async] }}
-      <button routerLink="/calendars/{{ calendar.name }}/event/{{ event.key }}">
+      <button
+        routerLink="/calendars/{{ calendarName$ | async }}/event/{{
+          event.key
+        }}"
+      >
         Edit
       </button>
       <button (click)="deleteEvent($event, event.key)">Delete</button>
@@ -39,7 +37,7 @@
   </ul>
 
   <div class="buttons">
-    <button routerLink="/calendars/{{ calendar.name }}/add-event">
+    <button routerLink="/calendars/{{ calendarName$ | async }}/add-event">
       Add Event
     </button>
     <button (click)="goBack()">Back</button>

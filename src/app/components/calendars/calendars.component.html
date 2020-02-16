@@ -5,12 +5,26 @@
 <div>
   <p>Pick a calendar:</p>
   <ul class="calendars">
-    <a
+    <button
       class="calendar"
-      *ngFor="let calendar of calendars"
-      routerLink="/calendars/{{ calendar.name }}"
+      *ngFor="let calendar of calendars$ | async"
+      (click)="openCalendar(calendar.id, calendar.name)"
     >
       <span>{{ calendar.name }}</span>
-    </a>
+    </button>
   </ul>
+</div>
+
+<div>
+  Make a new calendar
+
+  <div>
+    <label>
+      Calendar Name:
+      <input type="text" [formControl]="name" required />
+    </label>
+    <button (click)="saveCalendarName()" class="btn ">
+      Create
+    </button>
+  </div>
 </div>

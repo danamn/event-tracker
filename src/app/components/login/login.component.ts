@@ -2,6 +2,9 @@ import { Component } from "@angular/core";
 import { Router, Params } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../services/user.service";
+import { FirebaseService } from "../../services/firebase.service";
+// import { LocalStorageService } from "../../services/local-storage.service";
+// import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "page-login",
@@ -15,8 +18,10 @@ export class LoginComponent {
   constructor(
     public userService: UserService,
     private router: Router,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder,
+    private firebaseService: FirebaseService // private localStorage: LocalStorageService,
+  ) // private userService: UserService,
+  {
     this.createForm();
   }
 
@@ -29,6 +34,11 @@ export class LoginComponent {
 
   tryGoogleLogin() {
     this.userService.doGoogleLogin().then(res => {
+      const {
+        user: { uid, email }
+      } = res;
+      this.firebaseService.createUser(uid, email);
+      this.userService.storeUser(uid);
       this.router.navigate(["/calendars"]);
     });
   }

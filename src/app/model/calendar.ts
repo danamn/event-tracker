@@ -1,12 +1,12 @@
-import { CalendarMetadata } from "./calendar-metadata";
+// import { CalendarMetadata } from "./calendar-metadata";
 import { DataModel } from "./data-model";
 import { Entry } from "./entry";
-import { TypeModel } from "./type-model";
 
 export interface Calendar {
-  calendarMetadata: CalendarMetadata;
+  // calendarMetadata: CalendarMetadata;
+  name: string;
   eventModel: DataModel;
-  eventTypeModel: TypeModel;
+  eventTypeModel: DataModel;
   // events: Entry[];
   events: Record<string, Entry>;
   // types: Entry[];

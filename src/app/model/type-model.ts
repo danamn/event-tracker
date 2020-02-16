@@ -1,8 +1,6 @@
+// import { ModelField } from "../model/model-field";
 
-import { ModelField } from "../model/model-field";
-
-
-export interface TypeModel extends Array<ModelField> {}
+// export interface TypeModel extends Array<ModelField> {}
 
 // export interface TypeModel {
 //   fields: TMField[];

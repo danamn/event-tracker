@@ -6,14 +6,12 @@ import { Store, select } from "@ngrx/store";
 import {
   selectEvents,
   AppState,
-  selectEventTitleField
+  selectEventTitleField,
+  selectCalendarName
 } from "../../store/selectors";
-// import { Calendar } from "../../store/state";
 import { Observable } from "rxjs";
 
-import { CalendarMetadata } from "../../model/calendar-metadata";
 import { Entry } from "../../model/entry";
-import { CALENDARS } from "../calendars/mock-calendars";
 import * as AppAction from "../../store/actions";
 
 import { FirebaseService } from "../../services/firebase.service";
@@ -25,8 +23,7 @@ import { UserService } from "../../services/user.service";
   styleUrls: ["./calendar.component.css"]
 })
 export class CalendarComponent implements OnInit {
-  // calendar$: Observable<Calendar>;
-  calendar: CalendarMetadata;
+  calendarName$ = this.store.pipe(select(selectCalendarName));
   events$: Observable<Record<string, Entry>>;
   titleField$ = this.store.pipe(select(selectEventTitleField));
 
@@ -40,17 +37,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.events$ = this.store.pipe(select(selectEvents));
-    this.getCalendar();
-  }
-
-  getCalendar(): void {
-    const name = this.route.snapshot.paramMap.get("name");
-
-    const calendar: CalendarMetadata = CALENDARS.find(
-      (cal: CalendarMetadata) => cal.name === name
-    );
-
-    this.calendar = calendar;
   }
 
   deleteEvent(event, id) {
@@ -61,10 +47,11 @@ export class CalendarComponent implements OnInit {
     this.location.back();
   }
 
-  create(): void {
-    this.user.getUserFromStorage();
+  async create() {
+    // this.user.getUserFromStorage();
     // console.log("click");
-    // this.email$ = this.fb.getUsers();
+    // this.fb.getCalendars().then(res => console.log("r", res));
+    // .subscribe(calendar => console.log(calendar));
     // this.store.dispatch(AppAction.createCalendar({ calendarName: "tstName" }));
   }
 }

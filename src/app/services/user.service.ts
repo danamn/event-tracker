@@ -3,9 +3,10 @@ import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from "firebase/app";
 
-import { FirebaseService } from "./firebase.service";
+// import { FirebaseService } from "./firebase.service";
+// import { LocalStorageService } from "./local-storage.service";
 
-const TTL = 1000 * 60 * 60;
+const TTL = 1000 * 60 * 60 * 100;
 interface StoredUser {
   id: string;
   expiry: Date;
@@ -14,8 +15,8 @@ interface StoredUser {
 export class UserService {
   constructor(
     public afAuth: AngularFireAuth,
-    private firebase: FirebaseService,
-    private router: Router
+    // private firebaseService: FirebaseService,
+    private router: Router // private localStorage: LocalStorageService
   ) {}
 
   doGoogleLogin() {
@@ -25,11 +26,11 @@ export class UserService {
       provider.addScope("email");
       this.afAuth.auth.signInWithPopup(provider).then(
         res => {
-          const {
-            user: { uid, email }
-          } = res;
-          this.firebase.createUser(uid, email);
-          this.storeUser(uid);
+          // const {
+          //   user: { uid, email }
+          // } = res;
+          // this.firebaseService.createUser(uid, email);
+          // this.localStorage.storeUser(uid);
           resolve(res);
         },
         err => {
@@ -123,6 +124,7 @@ export class UserService {
   getUserFromStorage() {
     const userStr = localStorage.getItem("user");
     if (!userStr) {
+      this.logout();
       return null;
     }
     const user: StoredUser = JSON.parse(userStr);
@@ -133,8 +135,8 @@ export class UserService {
       return null;
     } else {
       this.storeUser(user.id);
+      return user.id;
     }
-    return user.id;
   }
 
   storeUser(userId: string) {
@@ -145,4 +147,21 @@ export class UserService {
     };
     localStorage.setItem("user", JSON.stringify(user));
   }
+
+  // getUserId() {
+  //   const userId = this.localStorage.getUserFromStorage();
+  //   if (!userId) {
+  //     this.logout();
+  //   }
+  //   return userId;
+  // }
+
+  // storeUser(userId: string) {
+  //   const now = new Date();
+  //   const user = {
+  //     id: userId,
+  //     expiry: new Date(now.getTime() + TTL)
+  //   };
+  //   localStorage.setItem("user", JSON.stringify(user));
+  // }
 }

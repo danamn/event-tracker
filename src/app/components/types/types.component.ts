@@ -3,7 +3,7 @@ import { Store, select } from "@ngrx/store";
 import { Location } from "@angular/common";
 
 import {
-  selectCalendar,
+  selectCalendarName,
   selectTypes,
   AppState,
   selectTypeTitleField
@@ -16,7 +16,7 @@ import * as AppAction from "../../store/actions";
   styleUrls: ["./types.component.css"]
 })
 export class TypesComponent implements OnInit {
-  calendar$ = this.store.pipe(select(selectCalendar));
+  calendar$ = this.store.pipe(select(selectCalendarName));
   types$ = this.store.pipe(select(selectTypes));
   titleField$ = this.store.pipe(select(selectTypeTitleField));
 
