@@ -15,57 +15,63 @@ const appReducer = createReducer<any>(
     return { currentCalendarId: id, calendar };
   }),
 
-  on(AppAction.addEvent, (state, { trEvent, eventId }) => {
-    return {
-      ...state,
-      calendar: {
-        ...state.calendar,
-        events: { ...state.events, [eventId]: trEvent }
-      }
-    };
+  // on(AppAction.addEvent, (state, { trEvent, eventId }) => {
+  //   return {
+  //     ...state,
+  //     calendar: {
+  //       ...state.calendar,
+  //       events: { ...state.events, [eventId]: trEvent }
+  //     }
+  //   };
+  // }),
+
+  on(AppAction.editEventSuccess, (state, { trEvent, eventId }) => {
+    // return {
+    //   ...state,
+    //   calendar: {
+    //     ...state.calendar,
+    //     events: { ...state.events, [eventId]: trEvent }
+    //   }
+    // };
+    return { ...state };
   }),
 
-  on(AppAction.editEvent, (state, { trEvent, eventId }) => {
-    return {
-      ...state,
-      calendar: {
-        ...state.calendar,
-        events: { ...state.events, [eventId]: trEvent }
-      }
-    };
+  // on(AppAction.deleteEventSuccess, (state, { eventId }) => {
+  //   const newEvents = { ...state.events };
+  //   delete newEvents[eventId];
+  //   return { ...state, calendar: { ...state.calendar, events: newEvents } };
+  // }),
+
+  on(AppAction.deleteEventSuccess, state => {
+    return { ...state };
   }),
 
-  on(AppAction.deleteEvent, (state, { eventId }) => {
-    const newEvents = { ...state.events };
-    delete newEvents[eventId];
-    return { ...state, calendar: { ...state.calendar, events: newEvents } };
+  // on(AppAction.addType, (state, { eventType, typeId }) => {
+  //   return {
+  //     ...state,
+  //     calendar: {
+  //       ...state.calendar,
+  //       types: { ...state.types, [typeId]: eventType }
+  //     }
+  //   };
+  // }),
+
+  on(AppAction.editTypeSuccess, state => {
+    // return {
+    //   ...state,
+    //   calendar: {
+    //     ...state.calendar,
+    //     types: { ...state.types, [typeId]: eventType }
+    //   }
+    // };
+    return { ...state };
   }),
 
-  on(AppAction.addType, (state, { eventType, typeId }) => {
-    return {
-      ...state,
-      calendar: {
-        ...state.calendar,
-        types: { ...state.types, [typeId]: eventType }
-      }
-    };
-  }),
-
-  on(AppAction.editType, (state, { eventType, typeId }) => {
-    return {
-      ...state,
-      calendar: {
-        ...state.calendar,
-        types: { ...state.types, [typeId]: eventType }
-      }
-    };
-  }),
-
-  on(AppAction.deleteType, (state, { typeId }) => {
-    const newTypes = { ...state.types };
-    delete newTypes[typeId];
-    return { ...state, calendar: { ...state.calendar, types: newTypes } };
-  }),
+  // on(AppAction.deleteType, (state, { typeId }) => {
+  //   const newTypes = { ...state.types };
+  //   delete newTypes[typeId];
+  //   return { ...state, calendar: { ...state.calendar, types: newTypes } };
+  // }),
 
   on(AppAction.setCalendarMetadata, (state, { calendarMetadata }) => {
     return { ...state, calendar: { ...state.calendar, calendarMetadata } };

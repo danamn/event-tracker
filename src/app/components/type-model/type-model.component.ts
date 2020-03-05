@@ -33,13 +33,14 @@ export class TypeModelComponent implements OnInit {
       .pipe(select(selectEventTypeModel), take(1))
       .subscribe(typeModel => {
         tM = typeModel;
+        console.log("tm", tM);
       });
     return tM;
   }
 
   handleSave({ dataModel, titleField }) {
-    this.store.dispatch(AppAction.setTypeModel({ eventTypeModel: dataModel }));
-    this.store.dispatch(AppAction.setTypeTitleField({ titleField }));
+    this.store.dispatch(AppAction.saveTypeModel({ eventTypeModel: dataModel }));
+    this.store.dispatch(AppAction.saveTypeTitleField({ titleField }));
     this.location.back();
   }
 }

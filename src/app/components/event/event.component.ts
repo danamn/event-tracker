@@ -61,26 +61,26 @@ export class EventComponent implements OnInit {
     return currentEvent;
   }
 
-  handleSave({ entry: trEvent, id }) {
+  handleSave({ entry: trEvent }) {
     const eventWithType = {
       ...trEvent,
       typeId: this.eventTypeSelector.value.type
     };
-    if (this.eventId) {
-      this.store.dispatch(
-        AppAction.editEvent({
-          trEvent: eventWithType,
-          eventId: this.eventId
-        })
-      );
-    } else {
-      this.store.dispatch(
-        AppAction.addEvent({
-          trEvent: eventWithType,
-          eventId: id
-        })
-      );
-    }
+    // if (this.eventId) {
+    this.store.dispatch(
+      AppAction.saveEvent({
+        trEvent: eventWithType,
+        eventId: this.eventId
+      })
+    );
+    // } else {
+    //   this.store.dispatch(
+    //     AppAction.addEvent({
+    //       trEvent: eventWithType,
+    //       eventId: id
+    //     })
+    //   );
+    // }
     this.location.back();
 
     // this.router.navigate(['/']);

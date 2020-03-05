@@ -31,6 +31,7 @@ export class TypeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("type");
     const urlId = this.route.snapshot.paramMap.get("id");
     if (urlId) {
       this.typeId = urlId;
@@ -51,17 +52,19 @@ export class TypeComponent implements OnInit {
     return currentType;
   }
 
-  handleSave({ entry: eventType, id }) {
-    if (this.typeId) {
-      this.store.dispatch(
-        AppAction.editType({
-          eventType,
-          typeId: this.typeId
-        })
-      );
-    } else {
-      this.store.dispatch(AppAction.addType({ eventType, typeId: id }));
-    }
+  handleSave({ entry: eventType }) {
+    // if (this.typeId) {
+    console.log(eventType);
+
+    this.store.dispatch(
+      AppAction.saveType({
+        eventType,
+        typeId: this.typeId
+      })
+    );
+    // } else {
+    //   this.store.dispatch(AppAction.addType({ eventType, typeId: id }));
+    // }
     this.location.back();
 
     // this.router.navigate(['/']);

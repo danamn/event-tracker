@@ -10,11 +10,8 @@ export interface AppState {
 export const selectCurrentCalendar = (state: AppState) =>
   state["calendarReducer"].calendar;
 
-export const selectCurrentCalendarId = (state: AppState) => {
-  console.log("selec", state);
-
-  return state["calendarReducer"].currentCalendarId;
-};
+export const selectCurrentCalendarId = (state: AppState) =>
+  state["calendarReducer"].currentCalendarId;
 
 export const selectCalendarName = createSelector(
   selectCurrentCalendar,

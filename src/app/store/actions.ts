@@ -27,33 +27,46 @@ export const setCalendarMetadata = createAction(
   props<{ calendarMetadata: CalendarMetadata }>()
 );
 
-export const addType = createAction(
-  "[Type] Add Type",
+// export const addType = createAction(
+//   "[Type] Add Type",
+//   props<{ eventType: Entry; typeId: string }>()
+// );
+
+export const saveType = createAction(
+  "[Type] Save Type",
   props<{ eventType: Entry; typeId: string }>()
 );
 
-export const editType = createAction(
-  "[Type] Edit Type",
-  props<{ eventType: Entry; typeId: string }>()
+export const editTypeSuccess = createAction(
+  "[Type] Edit Type Success"
+  // props<{ eventType: Entry; typeId: string }>()
 );
+
 export const deleteType = createAction(
   "[Type] Delete Type",
   props<{ typeId: string }>()
 );
 
-export const addEvent = createAction(
-  "[Event] Add Event",
+export const deleteTypeSuccess = createAction("[Type] Delete Type Success");
+
+export const saveEvent = createAction(
+  "[Event] Save Event",
   props<{ trEvent: Entry; eventId: string }>()
 );
 
-export const editEvent = createAction(
-  "[Event] Edit Event",
+export const editEventSuccess = createAction(
+  "[Event] Edit Event Success",
   props<{ trEvent: Entry; eventId: string }>()
 );
 
 export const deleteEvent = createAction(
   "[Event] Delete Event",
   props<{ eventId: string }>()
+);
+
+export const deleteEventSuccess = createAction(
+  "[Event] Delete Event Success"
+  // props<{ eventId: string }>()
 );
 
 export const setEventModel = createAction(
@@ -74,6 +87,11 @@ export const saveTypeModel = createAction(
   props<{ eventTypeModel: DataModel }>()
 );
 
+export const saveEventTitleField = createAction(
+  "[Event Title Field] Save Event Title Field",
+  props<{ titleField: string }>()
+);
+
 export const setEventTitleField = createAction(
   "[Event Title Field] Set Event Title Field",
   props<{ titleField: string }>()
@@ -84,20 +102,33 @@ export const setTypeTitleField = createAction(
   props<{ titleField: string }>()
 );
 
+export const saveTypeTitleField = createAction(
+  "[Type Title Field] Save Type Title Field",
+  props<{ titleField: string }>()
+);
+
 const all = union({
   createCalendar,
   loadCalendar,
   setCalendarMetadata,
   storeCalendar,
+  editEventSuccess,
+  saveEvent,
   deleteEvent,
-  addType,
-  editType,
+  deleteEventSuccess,
+  // addType,
+  // editType,
+  saveType,
+  deleteType,
+  deleteTypeSuccess,
   setEventModel,
   saveEventModel,
   setTypeModel,
   saveTypeModel,
   setEventTitleField,
-  setTypeTitleField
+  saveEventTitleField,
+  setTypeTitleField,
+  saveTypeTitleField
 });
 
 export type CoreActionsUnion = typeof all;

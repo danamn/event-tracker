@@ -20,7 +20,7 @@ export class ModelFormComponent implements OnInit {
   constructor(private store: Store<Selectors.AppState>) {}
 
   ngOnInit() {
-    this.currentFields = this.formData;
+    this.currentFields = this.formData || [];
   }
 
   onSetTitleField(event, fieldName) {

@@ -53,7 +53,7 @@ export class EventModelComponent implements OnInit {
       console.log(dataModel);
 
       this.store.dispatch(AppAction.saveEventModel({ eventModel: dataModel }));
-      this.store.dispatch(AppAction.setEventTitleField({ titleField }));
+      this.store.dispatch(AppAction.saveEventTitleField({ titleField }));
       this.location.back();
     } else {
       console.log("the event model doesn't have a type field");

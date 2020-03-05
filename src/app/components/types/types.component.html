@@ -4,9 +4,7 @@ Types
   <li *ngFor="let type of types$ | async | keyvalue">
     {{ type.value[titleField$ | async] }}
     <button
-      routerLink="/calendars/{{ (calendar$ | async)?.name }}/type/{{
-        type.key
-      }}"
+      routerLink="/calendars/{{ calendarName$ | async }}/type/{{ type.key }}"
     >
       Edit
     </button>
@@ -15,7 +13,7 @@ Types
 </ul>
 
 <div class="buttons">
-  <button routerLink="/calendars/{{ (calendar$ | async)?.name }}/add-type">
+  <button routerLink="/calendars/{{ calendarName$ | async }}/add-type">
     Add Type
   </button>
   <button (click)="goBack()">Back</button>

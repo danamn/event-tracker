@@ -162,6 +162,149 @@ export class AppEffects {
     )
   );
 
+  setEventTitleField$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType("[Event Title Field] Save Event Title Field"),
+      withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
+      mergeMap(([action, id]) =>
+        this.firebaseService
+          .setTitleField(id, action.titleField, "eventTitleField")
+          .pipe(
+            map(response => {
+              if (response) {
+                // TO DO error handling if no response
+                return AppActions.setEventTitleField({
+                  titleField: action.titleField
+                });
+              }
+            }),
+            catchError(error => {
+              return EMPTY;
+            })
+          )
+      )
+    )
+  );
+
+  setTypeTitleField$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType("[Type Title Field] Save Type Title Field"),
+      withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
+      mergeMap(([action, id]) =>
+        this.firebaseService
+          .setTitleField(id, action.titleField, "typeTitleField")
+          .pipe(
+            map(response => {
+              if (response) {
+                // TO DO error handling if no response
+                return AppActions.setTypeTitleField({
+                  titleField: action.titleField
+                });
+              }
+            }),
+            catchError(error => {
+              return EMPTY;
+            })
+          )
+      )
+    )
+  );
+
+  editEvent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType("[Event] Save Event"),
+      withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
+      mergeMap(([action, calendarId]) =>
+        this.firebaseService
+          .editEvent(calendarId, action.trEvent, action.eventId)
+          .pipe(
+            map((response: string) => {
+              if (response) {
+                const id = response;
+                // TO DO error handling if no response
+                return AppActions.editEventSuccess({
+                  trEvent: action.trEvent,
+                  eventId: id
+                });
+              }
+            }),
+            catchError(error => {
+              return EMPTY;
+            })
+          )
+      )
+    )
+  );
+
+  deleteEvent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType("[Event] Delete Event"),
+      withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
+      mergeMap(([action, calendarId]) =>
+        this.firebaseService.deleteEvent(calendarId, action.eventId).pipe(
+          map((response: string) => {
+            if (response) {
+              // const id = response;
+              // TO DO error handling if no response
+              return AppActions.deleteEventSuccess();
+            }
+          }),
+          catchError(error => {
+            return EMPTY;
+          })
+        )
+      )
+    )
+  );
+
+  editType$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType("[Type] Save Type"),
+      withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
+      mergeMap(
+        ([action, calendarId]) =>
+          this.firebaseService.editType(
+            calendarId,
+            action.eventType,
+            action.typeId
+          )
+        .pipe(
+          map((response: string) => {
+            if (response) {
+              const id = response;
+              // TO DO error handling if no response
+              return AppActions.editTypeSuccess();
+            }
+          }),
+          catchError(error => {
+            return EMPTY;
+          })
+        )
+      )
+    )
+  );
+
+  deleteType$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType("[Type] Delete Type"),
+      withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
+      mergeMap(([action, calendarId]) =>
+        this.firebaseService.deleteType(calendarId, action.typeId).pipe(
+          map((response: string) => {
+            if (response) {
+              // const id = response;
+              // TO DO error handling if no response
+              return AppActions.deleteEventSuccess();
+            }
+          }),
+          catchError(error => {
+            return EMPTY;
+          })
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions<CoreActionsUnion>,
     private service: CalendarService,

@@ -16,7 +16,7 @@ import * as AppAction from "../../store/actions";
   styleUrls: ["./types.component.css"]
 })
 export class TypesComponent implements OnInit {
-  calendar$ = this.store.pipe(select(selectCalendarName));
+  calendarName$ = this.store.pipe(select(selectCalendarName));
   types$ = this.store.pipe(select(selectTypes));
   titleField$ = this.store.pipe(select(selectTypeTitleField));
 

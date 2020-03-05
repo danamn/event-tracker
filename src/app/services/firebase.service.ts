@@ -112,11 +112,107 @@ export class FirebaseService {
   setTypeModel(calendarId, typeModel) {
     const userId: string = this.userService.getUserFromStorage();
 
-    const path = `users/${userId}/calendars/${calendarId}/typeModel`;
+    const path = `users/${userId}/calendars/${calendarId}/eventTypeModel`;
     const typeModelRef = this.db.object(path);
 
     return from(typeModelRef.set(typeModel)).pipe(
       map(res => of(res)),
+      catchError(error => {
+        throw new Error(error);
+      })
+    );
+  }
+
+  setTitleField(calendarId, fieldName, titleFieldType) {
+    const userId: string = this.userService.getUserFromStorage();
+
+    const path = `users/${userId}/calendars/${calendarId}/${titleFieldType}`;
+    const ref = this.db.object(path);
+
+    return from(ref.set(fieldName)).pipe(
+      map(res => of(res)),
+      catchError(error => {
+        throw new Error(error);
+      })
+    );
+  }
+
+  editEvent(calendarId, trEvent, eventId) {
+    const userId: string = this.userService.getUserFromStorage();
+    const path = `users/${userId}/calendars/${calendarId}/events`;
+    console.log("path", path, trEvent, eventId);
+
+    if (!eventId) {
+      const eventsRef = this.db.list(path);
+      return from(eventsRef.push(trEvent)).pipe(
+        map(res => {
+          const id = res.key;
+          return id;
+        }),
+        catchError(error => {
+          throw new Error(error);
+        })
+      );
+    } else {
+      const eventRef = this.db.list(`${path}`);
+      return from(eventRef.update(eventId, trEvent)).pipe(
+        map(res => eventId),
+        catchError(error => {
+          throw new Error(error);
+        })
+      );
+    }
+  }
+
+  deleteEvent(calendarId, eventId) {
+    const userId: string = this.userService.getUserFromStorage();
+    const path = `users/${userId}/calendars/${calendarId}/events`;
+    console.log("path", path, eventId);
+
+    const eventRef = this.db.object(`${path}/${eventId}`);
+    return from(eventRef.remove()).pipe(
+      map(res => eventId),
+      catchError(error => {
+        throw new Error(error);
+      })
+    );
+  }
+
+  editType(calendarId, eventType, typeId) {
+    const userId: string = this.userService.getUserFromStorage();
+    const path = `users/${userId}/calendars/${calendarId}/types`;
+    console.log("path", path, eventType, typeId);
+
+    if (!typeId) {
+      const typeRef = this.db.list(path);
+      return from(typeRef.push(eventType)).pipe(
+        map(res => {
+          const id = res.key;
+          return id;
+        }),
+        catchError(error => {
+          throw new Error(error);
+        })
+      );
+    } else {
+      const typeRef = this.db.object(`${path}/${typeId}`);
+      return from(typeRef.set(eventType)).pipe(
+        map(res => typeId),
+        catchError(error => {
+          throw new Error(error);
+        })
+      );
+    }
+  }
+
+  deleteType(calendarId, typeId) {
+    const userId: string = this.userService.getUserFromStorage();
+    const path = `users/${userId}/calendars/${calendarId}/types`;
+    console.log("path", path, typeId);
+
+    const eventRef = this.db.object(`${path}/${typeId}`);
+    return from(eventRef.remove()).pipe(
+      map(res => typeId),
       catchError(error => {
         throw new Error(error);
       })
