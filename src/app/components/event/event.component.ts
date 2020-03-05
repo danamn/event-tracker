@@ -10,6 +10,7 @@ import {
   selectEventModel,
   selectEvents,
   selectTypes,
+  selectTypeTitleField,
   AppState
 } from "../../store/selectors";
 import * as AppAction from "../../store/actions";
@@ -22,6 +23,7 @@ import * as AppAction from "../../store/actions";
 export class EventComponent implements OnInit {
   eventModel$ = this.store.pipe(select(selectEventModel));
   types$ = this.store.pipe(select(selectTypes));
+  typeTitleField$ = this.store.pipe(select(selectTypeTitleField));
 
   eventData: Entry;
   eventId: string;
@@ -46,8 +48,6 @@ export class EventComponent implements OnInit {
     } else {
       this.eventTypeSelector.get("type").setValue("default");
     }
-    // this.getEventFields();
-    // this.generateFormFields();
   }
 
   getEventData(id: string): Entry {
@@ -56,7 +56,6 @@ export class EventComponent implements OnInit {
       events = e;
     });
 
-    // const currentEvent = events.find(ev => ev.id === id);
     const currentEvent = events[id];
     return currentEvent;
   }
@@ -66,21 +65,13 @@ export class EventComponent implements OnInit {
       ...trEvent,
       typeId: this.eventTypeSelector.value.type
     };
-    // if (this.eventId) {
     this.store.dispatch(
       AppAction.saveEvent({
         trEvent: eventWithType,
         eventId: this.eventId
       })
     );
-    // } else {
-    //   this.store.dispatch(
-    //     AppAction.addEvent({
-    //       trEvent: eventWithType,
-    //       eventId: id
-    //     })
-    //   );
-    // }
+
     this.location.back();
 
     // this.router.navigate(['/']);

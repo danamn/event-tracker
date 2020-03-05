@@ -17,10 +17,7 @@ export const selectCalendarName = createSelector(
   selectCurrentCalendar,
   (state: Calendar) => state.name
 );
-// export const selectCalendarId = createSelector(
-//   selectCurrentCalendar,
-//   (state: Calendar) => state.id
-// );
+
 export const selectEvents = createSelector(
   selectCurrentCalendar,
   (state: Calendar) => state.events

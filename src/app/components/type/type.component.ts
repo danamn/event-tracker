@@ -26,7 +26,6 @@ export class TypeComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    // private router: Router,
     private location: Location
   ) {}
 
@@ -37,8 +36,6 @@ export class TypeComponent implements OnInit {
       this.typeId = urlId;
       this.typeData = this.getTypeData(urlId);
     }
-    // this.getEventFields();
-    // this.generateFormFields();
   }
 
   getTypeData(id: string): Entry {
@@ -47,24 +44,18 @@ export class TypeComponent implements OnInit {
       types = e;
     });
 
-    // const currentType = types.find(ev => ev.id === id);
     const currentType = types[id];
     return currentType;
   }
 
   handleSave({ entry: eventType }) {
-    // if (this.typeId) {
-    console.log(eventType);
-
     this.store.dispatch(
       AppAction.saveType({
         eventType,
         typeId: this.typeId
       })
     );
-    // } else {
-    //   this.store.dispatch(AppAction.addType({ eventType, typeId: id }));
-    // }
+
     this.location.back();
 
     // this.router.navigate(['/']);

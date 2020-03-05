@@ -4,10 +4,6 @@ import { DataModel } from "../model/data-model";
 import { Entry } from "../model/entry";
 import { Calendar } from "../model/calendar";
 
-// export const setCurrentCalendarId = createAction(
-//   "[Calendar] Set Current Calendar Id",
-//   props<{ id: string }>()
-// );
 export const createCalendar = createAction(
   "[Calendar] Create Calendar",
   props<{ calendarName: string }>()
@@ -27,20 +23,12 @@ export const setCalendarMetadata = createAction(
   props<{ calendarMetadata: CalendarMetadata }>()
 );
 
-// export const addType = createAction(
-//   "[Type] Add Type",
-//   props<{ eventType: Entry; typeId: string }>()
-// );
-
 export const saveType = createAction(
   "[Type] Save Type",
   props<{ eventType: Entry; typeId: string }>()
 );
 
-export const editTypeSuccess = createAction(
-  "[Type] Edit Type Success"
-  // props<{ eventType: Entry; typeId: string }>()
-);
+export const editTypeSuccess = createAction("[Type] Edit Type Success");
 
 export const deleteType = createAction(
   "[Type] Delete Type",
@@ -54,20 +42,14 @@ export const saveEvent = createAction(
   props<{ trEvent: Entry; eventId: string }>()
 );
 
-export const editEventSuccess = createAction(
-  "[Event] Edit Event Success",
-  props<{ trEvent: Entry; eventId: string }>()
-);
+export const editEventSuccess = createAction("[Event] Edit Event Success");
 
 export const deleteEvent = createAction(
   "[Event] Delete Event",
   props<{ eventId: string }>()
 );
 
-export const deleteEventSuccess = createAction(
-  "[Event] Delete Event Success"
-  // props<{ eventId: string }>()
-);
+export const deleteEventSuccess = createAction("[Event] Delete Event Success");
 
 export const setEventModel = createAction(
   "[Event Model] Set Event Model",
@@ -116,8 +98,6 @@ const all = union({
   saveEvent,
   deleteEvent,
   deleteEventSuccess,
-  // addType,
-  // editType,
   saveType,
   deleteType,
   deleteTypeSuccess,

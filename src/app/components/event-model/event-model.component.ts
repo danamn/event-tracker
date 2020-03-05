@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { take } from "rxjs/operators";
 
 import { AppState } from "../../store/selectors";
+
 import * as AppAction from "../../store/actions";
 import { DataModel } from "../../model/data-model";
 import { ModelField, ModelFieldType } from "../../model/model-field";
@@ -57,8 +58,9 @@ export class EventModelComponent implements OnInit {
       this.location.back();
     } else {
       console.log("the event model doesn't have a type field");
-      // eventModel.push({ name: "type", type: ModelFieldType.eventType });
-      // this.store.dispatch(AppAction.setEventModel({ eventModel }));
     }
+  }
+  onCancel() {
+    this.location.back();
   }
 }

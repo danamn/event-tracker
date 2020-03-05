@@ -24,7 +24,6 @@ export class CalendarsComponent implements OnInit {
     private router: Router
   ) {}
 
-  // calendars = CALENDARS;
   ngOnInit() {
     this.calendars$ = this.firebaseService.getCalendars();
   }

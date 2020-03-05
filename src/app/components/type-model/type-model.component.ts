@@ -33,7 +33,6 @@ export class TypeModelComponent implements OnInit {
       .pipe(select(selectEventTypeModel), take(1))
       .subscribe(typeModel => {
         tM = typeModel;
-        console.log("tm", tM);
       });
     return tM;
   }
@@ -41,6 +40,10 @@ export class TypeModelComponent implements OnInit {
   handleSave({ dataModel, titleField }) {
     this.store.dispatch(AppAction.saveTypeModel({ eventTypeModel: dataModel }));
     this.store.dispatch(AppAction.saveTypeTitleField({ titleField }));
+    this.location.back();
+  }
+
+  onCancel() {
     this.location.back();
   }
 }

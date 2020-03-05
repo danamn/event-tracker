@@ -3,27 +3,13 @@ import { Actions, ofType, createEffect } from "@ngrx/effects";
 import { Store, select } from "@ngrx/store";
 
 import { of, Observable, EMPTY } from "rxjs";
-import {
-  catchError,
-  exhaustMap,
-  map,
-  mergeMap,
-  withLatestFrom
-} from "rxjs/operators";
+import { catchError, map, mergeMap, withLatestFrom } from "rxjs/operators";
 import * as AppActions from "./actions";
 import { CoreActionsUnion } from "./actions";
 import { Calendar } from "../model/calendar";
-import { DataModel } from "../model/data-model";
 import { CalendarService } from "../services/calendar.service";
 import { FirebaseService } from "../services/firebase.service";
-import { Action } from "rxjs/internal/scheduler/Action";
-import {
-  selectEventTypeModel,
-  AppState,
-  selectCurrentCalendarId
-} from "./selectors";
-
-// import { AuthService } from '../services/auth.service';
+import { AppState, selectCurrentCalendarId } from "./selectors";
 
 const makeNewCalendar = (name: string): Calendar => {
   return {
@@ -39,39 +25,6 @@ const makeNewCalendar = (name: string): Calendar => {
 
 @Injectable()
 export class AppEffects {
-  // newCalendar: Calendar = {
-
-  //   eventModel: [
-  //     { name: "name", type: "date" },
-  //     { name: "day", type: "date" }
-  //   ],
-  //   eventTypeModel: [
-  //     // { name: "name", type: "inputField", isTitle: false },
-  //     // { name: "phone", type: "inputField", isTitle: false }
-  //   ],
-  //   events: {},
-  //   types: {},
-  //   eventTitleField: "",
-  //   typeTitleField: ""
-  // };
-  // createCalendar$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AppActions.setEventModel),
-  //     mergeMap(() =>
-  //       this.service.createCalendar(this.newCalendar).pipe(
-  //         map((id: string) => {
-  //           console.log(id);
-  //           if (id) {
-  //             return AppActions.setCalendarMetadata({
-  //               calendarMetadata: { id, name: "123" }
-  //             });
-  //           }
-  //         })
-  //       )
-  //     )
-  //   )
-  // );
-
   createCalendar$ = createEffect(() =>
     this.actions$.pipe(
       // ofType(AppActions.setEventModel),
@@ -86,7 +39,6 @@ export class AppEffects {
               id,
               calendar: newCalendar
             });
-            // });
           }),
           catchError(error => {
             return EMPTY;
@@ -103,8 +55,6 @@ export class AppEffects {
       mergeMap(action => {
         return this.firebaseService.loadCalendar(action.calendarId).pipe(
           map((response: Calendar) => {
-            console.log("res", response);
-
             return AppActions.storeCalendar({
               id: action.calendarId,
               calendar: response
@@ -222,10 +172,7 @@ export class AppEffects {
               if (response) {
                 const id = response;
                 // TO DO error handling if no response
-                return AppActions.editEventSuccess({
-                  trEvent: action.trEvent,
-                  eventId: id
-                });
+                return AppActions.editEventSuccess();
               }
             }),
             catchError(error => {
@@ -244,7 +191,6 @@ export class AppEffects {
         this.firebaseService.deleteEvent(calendarId, action.eventId).pipe(
           map((response: string) => {
             if (response) {
-              // const id = response;
               // TO DO error handling if no response
               return AppActions.deleteEventSuccess();
             }
@@ -261,25 +207,21 @@ export class AppEffects {
     this.actions$.pipe(
       ofType("[Type] Save Type"),
       withLatestFrom(this.store.pipe(select(selectCurrentCalendarId))),
-      mergeMap(
-        ([action, calendarId]) =>
-          this.firebaseService.editType(
-            calendarId,
-            action.eventType,
-            action.typeId
+      mergeMap(([action, calendarId]) =>
+        this.firebaseService
+          .editType(calendarId, action.eventType, action.typeId)
+          .pipe(
+            map((response: string) => {
+              if (response) {
+                const id = response;
+                // TO DO error handling if no response
+                return AppActions.editTypeSuccess();
+              }
+            }),
+            catchError(error => {
+              return EMPTY;
+            })
           )
-        .pipe(
-          map((response: string) => {
-            if (response) {
-              const id = response;
-              // TO DO error handling if no response
-              return AppActions.editTypeSuccess();
-            }
-          }),
-          catchError(error => {
-            return EMPTY;
-          })
-        )
       )
     )
   );
@@ -292,7 +234,6 @@ export class AppEffects {
         this.firebaseService.deleteType(calendarId, action.typeId).pipe(
           map((response: string) => {
             if (response) {
-              // const id = response;
               // TO DO error handling if no response
               return AppActions.deleteEventSuccess();
             }

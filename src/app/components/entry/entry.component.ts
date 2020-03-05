@@ -4,8 +4,6 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { DataModel } from "../../model/data-model";
 import { Entry } from "../../model/entry";
-
-// import { GenerateIdService } from "src/app/services/generate-id.service";
 import { EntryField } from "src/app/model/entry-field";
 
 @Component({
