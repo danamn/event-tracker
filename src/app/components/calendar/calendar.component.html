@@ -24,7 +24,7 @@
 
   <ul>
     <li *ngFor="let event of events$ | async | keyvalue">
-      {{ event.value[titleField$ | async] }}
+      {{ event.value[titleField$ | async] || event.value.typeDisplayName }}
       <button
         routerLink="/calendars/{{ calendarName$ | async }}/event/{{
           event.key

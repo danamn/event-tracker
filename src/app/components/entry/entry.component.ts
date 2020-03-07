@@ -27,14 +27,18 @@ export class EntryComponent implements OnInit {
   }
 
   getEntryFields() {
-    this.entryModel.forEach(f => {
-      const fieldValue = this.entryData && this.entryData[f.name];
-      this.entryFields.push({
-        fieldName: f.name,
-        fieldType: f.type,
-        value: fieldValue
+    if (this.entryModel) {
+      this.entryModel.forEach(f => {
+        const fieldValue = this.entryData && this.entryData[f.name];
+        if (f.name !== "type") {
+          this.entryFields.push({
+            fieldName: f.name,
+            fieldType: f.type,
+            value: fieldValue
+          });
+        }
       });
-    });
+    }
   }
 
   generateFormGroup() {

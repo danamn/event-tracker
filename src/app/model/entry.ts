@@ -1,6 +1,7 @@
 export interface Entry {
   id: string;
   typeId?: string;
+  typeDisplayName: string;
   [key: string]: string | Date | number;
   // constructor(args: object) {
   //   Object.keys(args).forEach(arg => (this[arg] = args[arg]));
